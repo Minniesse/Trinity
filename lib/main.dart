@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
-import 'Home.dart';
+import 'package:lottie/lottie.dart';
+import 'get_started.dart';
+import 'package:preload_page_view/preload_page_view.dart';
+
+void main() {
+  runApp(const Test());
+}
 
 class Test extends StatelessWidget {
   const Test({super.key});
@@ -7,111 +13,83 @@ class Test extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: MyWidget(),
+      home: Splash(),
     );
   }
 }
 
-class MyWidget extends StatelessWidget {
-  const MyWidget({super.key});
+class Splash extends StatefulWidget {
+  const Splash({super.key});
+
+  @override
+  State<Splash> createState() => _SplashState();
+}
+
+class _SplashState extends State<Splash> {
+  //Preload images (next page)
+  Future<void> _preloadImages(BuildContext context) async {
+    final imagePaths = [
+      'C:/Users/moski/Downloads/app/flutter_app/image/Trinity.png',
+      'C:/Users/moski/Downloads/app/flutter_app/pic/cloud_sun.png',
+      'C:/Users/moski/Downloads/app/flutter_app/pic/cloud.png',
+      'C:/Users/moski/Downloads/app/flutter_app/pic/wave.png',
+      // 'assets/image3.png',
+      // 'assets/image4.png',
+      // 'assets/image5.png',
+      // Add more image paths as necessary
+    ];
+    for (final imagePath in imagePaths) {
+      await precacheImage(Image.asset(imagePath).image, context);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(const Duration(seconds: 2), () {
+      _preloadImages(context).then((_) => Navigator.push(
+          context, MaterialPageRoute(builder: (context) => const MyWidget())));
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Stack(children: [
-      Container(
-        margin: const EdgeInsets.only(bottom: 70),
-        child: Align(
-          alignment: Alignment.bottomCenter,
-          child: ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const Home()),
-              );
-            },
-            style: ElevatedButton.styleFrom(
-              minimumSize: const Size(242, 54),
-              foregroundColor: const Color(0xffaf6900),
-              backgroundColor: Colors.white,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(26),
-                side: const BorderSide(
-                  color: Color(0xffe09007),
-                  width: 2.14,
-                ),
-              ),
-            ),
-            child: const Text("Get Started",
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w500,
-                  fontFamily: 'Inter',
-                )),
-          ),
-        ),
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+      body: Stack(
+        children: [
+          Container(
+              alignment: Alignment.center,
+              child: const Image(
+                width: 200,
+                height: 200,
+                image: AssetImage(
+                    "C:/Users/moski/Downloads/app/flutter_app/image/Trinity.png"),
+              )),
+          Container(
+            margin: const EdgeInsets.fromLTRB(0, 0, 0, 40),
+            alignment: Alignment.bottomCenter,
+            child: const Image(
+                image: AssetImage(
+                    "C:/Users/moski/Downloads/app/flutter_app/pic/Trinity_text.png")),
+          )
+        ],
       ),
-      Container(
-          margin: const EdgeInsets.only(top: 40),
-          child: const Align(
-            alignment: Alignment.topCenter,
-            child: Image(
-              height: 150,
-              image: AssetImage(
-                "C:/Users/moski/Downloads/app/flutter_app/image/Trinity.png",
-              ),
-              fit: BoxFit.cover,
-            ),
-          )),
-      Container(
-        margin: const EdgeInsets.only(top: 120),
-        child: const Align(
-          alignment: Alignment.topRight,
-          child: Image(
-            height: 250,
-            image: AssetImage(
-              "C:/Users/moski/Downloads/app/flutter_app/pic/cloud_sun.png",
-            ),
-            fit: BoxFit.cover,
-          ),
-        ),
-      ),
-      Container(
-        margin: const EdgeInsets.only(top: 390),
-        child: const Align(
-          alignment: Alignment.topLeft,
-          child: Image(
-            height: 250,
-            image: AssetImage(
-              "C:/Users/moski/Downloads/app/flutter_app/pic/cloud.png",
-            ),
-            fit: BoxFit.cover,
-          ),
-        ),
-      ),
-      Container(
-          margin: const EdgeInsets.only(top: 10),
-          child: const Align(
-            alignment: Alignment.center,
-            child: Text("Hi, Welcome!\n",
-                style: TextStyle(
-                  fontSize: 30,
-                  //fontWeight: FontWeight.w500,
-                  fontFamily: 'Poppins',
-                  color: Color.fromARGB(255, 68, 68, 68),
-                )),
-          )),
-      Container(
-        margin: const EdgeInsets.only(top: 35),
-        child: const Align(
-            alignment: Alignment.center,
-            child: Image(
-              height: 30,
-              image: AssetImage(
-                  "C:/Users/moski/Downloads/app/flutter_app/pic/wave.png"),
-              fit: BoxFit.cover,
-            )),
-      )
-    ]));
+    );
+    //   body: Container(
+    //       alignment: Alignment.center,
+    //       child: Stack(
+    //         children: [
+    //           Container(
+    //             margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+    //             alignment: Alignment.center,
+    //             width: 10000,
+    //             height: 10000,
+    //             child: Lottie.asset(
+    //                 'C:/Users/moski/Downloads/app/flutter_app/pic/splash_screen.json'),
+    //           )
+    //         ],
+    //       )),
+    // );
   }
 }
