@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/get_start.dart';
 import 'Home.dart';
-
-
 
 class Policy extends StatefulWidget {
   const Policy({super.key});
@@ -17,17 +14,14 @@ class _PolicyState extends State<Policy> {
     return Scaffold(
         body: Stack(children: [
       Container(
-        margin: const EdgeInsets.only(top: 0),
-        child: const Align(
-            alignment: Alignment.center,
-            child: Image(
-              height: 1000,
-              width: 1000,
-              image: AssetImage(
-                "C:/Users/moski/Downloads/app/flutter_app/pic/Group 36697.png",
-              ),
-              fit: BoxFit.cover,
-            )),
+        constraints: const BoxConstraints.expand(),
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(
+                "C:/Users/moski/Downloads/app/flutter_app/pic/Group 36697.png"),
+            fit: BoxFit.cover,
+          ),
+        ),
       ),
       Container(
         margin: const EdgeInsets.only(top: 30),

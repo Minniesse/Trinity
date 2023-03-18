@@ -9,6 +9,46 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  //name
+  var _name;
+  final _nameController = TextEditingController();
+  //button
+  bool submit = false;
+
+  //Preload images (next page)
+  Future<void> _preloadImages(BuildContext context) async {
+    final imagePaths = [
+      'C:/Users/moski/Downloads/app/flutter_app/pic/Group 36697.png',
+      'C:/Users/moski/Downloads/app/flutter_app/pic/Group 36717.png',
+      // 'assets/image3.png',
+      // 'assets/image4.png',
+      // 'assets/image5.png',
+      // Add more image paths as necessary
+    ];
+    for (final imagePath in imagePaths) {
+      await precacheImage(Image.asset(imagePath).image, context);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    _nameController.addListener(() {
+      _updatename();
+      setState(() {
+        submit = _nameController.text.isNotEmpty; //button
+      });
+    });
+  }
+
+  //void name
+  void _updatename() {
+    setState(() {
+      _name = _nameController.text; //name
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,8 +84,7 @@ class _HomeState extends State<Home> {
                     ),
                   ],
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                child: Stack(
                   children: [
                     Container(
                       margin: const EdgeInsets.fromLTRB(25, 5, 0, 20),
@@ -56,7 +95,7 @@ class _HomeState extends State<Home> {
                               "C:/Users/moski/Downloads/app/flutter_app/pic/Logo.png")),
                     ),
                     Container(
-                      margin: const EdgeInsets.fromLTRB(255, 0, 0, 0),
+                      margin: const EdgeInsets.fromLTRB(255, 95, 0, 0),
                       width: 40,
                       height: 40,
                       child: const Image(
@@ -64,13 +103,23 @@ class _HomeState extends State<Home> {
                               "C:/Users/moski/Downloads/app/flutter_app/pic/sun.png")),
                     ),
                     Container(
-                      padding: const EdgeInsets.fromLTRB(25, 25, 0, 0),
+                      margin: const EdgeInsets.fromLTRB(25, 100, 0, 0),
+                      child: Text(
+                        (_nameController.text),
+                        style: const TextStyle(
+                            fontSize: 22,
+                            fontFamily: 'SourceSansPro',
+                            color: Color.fromRGBO(68, 68, 68, 1)),
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.fromLTRB(25, 165, 0, 0),
                       child: const Text(
                         "Trinity Card",
                         style: TextStyle(
                             fontSize: 22,
                             fontFamily: 'SourceSansPro',
-                            color: Color.fromARGB(255, 96, 96, 96)),
+                            color: Color.fromRGBO(68, 68, 68, 1)),
                       ),
                     )
                   ],
@@ -103,15 +152,22 @@ class _HomeState extends State<Home> {
                             ),
                           )),
                       Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 16),
-                        child: TextFormField(
-                          decoration: const InputDecoration(
-                            border: UnderlineInputBorder(),
-                            labelText: 'Maximum 16 Characters',
-                          ),
-                        ),
-                      )
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 16),
+                          child: TextFormField(
+                            maxLength: 16,
+                            controller: _nameController,
+                            style: const TextStyle(
+                                // fontSize: 22,
+                                fontFamily: 'Poppins',
+                                color: Color.fromARGB(255, 69, 69, 69)),
+                            decoration: const InputDecoration(
+                              counterText:
+                                  '', //remove counter (hidden the character remaining)
+                              border: UnderlineInputBorder(),
+                              labelText: 'Maximum 16 Characters',
+                            ),
+                          ))
                     ],
                   )),
               Container(
@@ -138,14 +194,19 @@ class _HomeState extends State<Home> {
                   margin: const EdgeInsets.fromLTRB(0, 0, 0, 150),
                   child: Align(
                     alignment: Alignment.bottomCenter,
+                    //submit see the 16th line
                     child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const Policy()),
-                        );
-                      },
+                      onPressed: submit
+                          ? () {
+                              _preloadImages(context).then((_) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const Policy()),
+                                );
+                              });
+                            }
+                          : null,
                       style: ElevatedButton.styleFrom(
                         minimumSize: const Size(125, 54),
                         foregroundColor: const Color(0xffaf6900),
