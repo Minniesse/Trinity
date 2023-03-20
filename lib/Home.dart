@@ -56,7 +56,7 @@ class _HomeState extends State<Home> {
         resizeToAvoidBottomInset: false,
         body: Padding(
           padding: const EdgeInsets.fromLTRB(30, 90, 30, 0),
-          child: Stack(
+          child: Column(
             children: [
               Container(
                 margin: const EdgeInsets.fromLTRB(0, 40.0, 0, 0),
@@ -95,7 +95,7 @@ class _HomeState extends State<Home> {
                               "C:/Users/moski/Downloads/app/flutter_app/pic/Logo.png")),
                     ),
                     Container(
-                      margin: const EdgeInsets.fromLTRB(255, 95, 0, 0),
+                      margin: const EdgeInsets.fromLTRB(270, 95, 0, 0),
                       width: 40,
                       height: 40,
                       child: const Image(
@@ -126,9 +126,10 @@ class _HomeState extends State<Home> {
                 ),
               ),
               Container(
-                  width: 400,
+                  width: 362,
                   height: 175,
-                  margin: const EdgeInsets.fromLTRB(0, 290, 0, 0),
+                  //height: MediaQuery.of(context).size.height * 0.22,
+                  margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
                   decoration: BoxDecoration(
                     border: Border.all(
                         color: const Color.fromRGBO(216, 218, 220, 1),
@@ -167,66 +168,72 @@ class _HomeState extends State<Home> {
                               border: UnderlineInputBorder(),
                               labelText: 'Maximum 16 Characters',
                             ),
-                          ))
+                          )),
                     ],
                   )),
               Container(
-                margin: const EdgeInsets.fromLTRB(220, 510, 0, 0),
-                width: 90,
-                height: 90,
-                child: const Image(
-                    image: AssetImage(
-                        "C:/Users/moski/Downloads/app/flutter_app/pic/Glass_Drink.png")),
-              ),
-              Container(
-                margin: const EdgeInsets.fromLTRB(0, 520, 180, 0),
-                child: const Align(
-                    alignment: Alignment.center,
-                    child: Image(
-                      height: 90,
-                      image: AssetImage(
+                  //color: Colors.orange,
+                  child: Stack(
+                children: [
+                  Container(
+                      alignment: Alignment.center,
+                      margin: const EdgeInsets.fromLTRB(230, 80, 0, 0),
+                      child: Image.asset(
+                        "C:/Users/moski/Downloads/app/flutter_app/pic/Glass_Drink.png",
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height * 0.12,
+                        fit: BoxFit.contain,
+                      )),
+                  Container(
+                      alignment: Alignment.center,
+                      margin: const EdgeInsets.fromLTRB(0, 20, 240, 0),
+                      child: Image.asset(
                         "C:/Users/moski/Downloads/app/flutter_app/pic/Soda_Can.png",
-                      ),
-                      fit: BoxFit.cover,
-                    )),
-              ),
-              Container(
-                  margin: const EdgeInsets.fromLTRB(0, 0, 0, 150),
-                  child: Align(
-                    alignment: Alignment.bottomCenter,
-                    //submit see the 16th line
-                    child: ElevatedButton(
-                      onPressed: submit
-                          ? () {
-                              _preloadImages(context).then((_) {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const Policy()),
-                                );
-                              });
-                            }
-                          : null,
-                      style: ElevatedButton.styleFrom(
-                        minimumSize: const Size(125, 54),
-                        foregroundColor: const Color(0xffaf6900),
-                        backgroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(26),
-                          side: const BorderSide(
-                            color: Color(0xffe09007),
-                            width: 2.14,
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height * 0.1,
+                        fit: BoxFit.contain,
+                      )),
+                  Container(
+                      margin: const EdgeInsets.fromLTRB(0, 70, 0, 0),
+                      child: Align(
+                        alignment: Alignment.bottomCenter,
+                        //submit see the 16th line
+                        child: ElevatedButton(
+                          onPressed: submit
+                              ? () {
+                                  _preloadImages(context).then((_) {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => const Policy()),
+                                    );
+                                  });
+                                }
+                              : null,
+                          style: ElevatedButton.styleFrom(
+                            minimumSize: Size(
+                                MediaQuery.of(context).size.width / 3,
+                                MediaQuery.of(context).size.height / 17),
+                            foregroundColor: const Color(0xffaf6900),
+                            backgroundColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(26),
+                              side: const BorderSide(
+                                color: Color(0xffe09007),
+                                width: 2.14,
+                              ),
+                            ),
                           ),
+                          child: const Text("Next",
+                              style: TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.w500,
+                                fontFamily: 'Inter',
+                              )),
                         ),
-                      ),
-                      child: const Text("Next",
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.w500,
-                            fontFamily: 'Inter',
-                          )),
-                    ),
-                  )),
+                      )),
+                ],
+              )),
             ],
           ),
         ));
