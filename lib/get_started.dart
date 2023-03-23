@@ -47,10 +47,12 @@ class _MyWidgetState extends State<MyWidget> {
       ),
       Container(
           margin: const EdgeInsets.only(top: 40),
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height * 0.18,
           child: const Align(
             alignment: Alignment.topCenter,
             child: Image(
-              height: 150,
+              //height: 150,
               image: AssetImage(
                 "C:/Users/moski/Downloads/app/flutter_app/image/Trinity.png",
               ),
@@ -58,7 +60,7 @@ class _MyWidgetState extends State<MyWidget> {
             ),
           )),
       Container(
-        margin: const EdgeInsets.only(top: 120),
+        margin: const EdgeInsets.only(top: 180),
         child: const Align(
           alignment: Alignment.topRight,
           child: Image(
@@ -71,11 +73,12 @@ class _MyWidgetState extends State<MyWidget> {
         ),
       ),
       Container(
-        margin: const EdgeInsets.only(top: 390),
+        margin: const EdgeInsets.only(top: 420),
+        //width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height * 0.4,
         child: const Align(
           alignment: Alignment.topLeft,
           child: Image(
-            height: 250,
             image: AssetImage(
               "C:/Users/moski/Downloads/app/flutter_app/pic/cloud.png",
             ),

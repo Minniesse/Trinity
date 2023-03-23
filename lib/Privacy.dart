@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/camera.dart';
 import 'Home.dart';
 
 class Policy extends StatefulWidget {
-  const Policy({Key? key}) : super(key: key);
+  const Policy({super.key});
 
   @override
   _PolicyState createState() => _PolicyState();
@@ -156,7 +157,7 @@ class _PolicyState extends State<Policy> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const Home()),
+                                builder: (context) => const camera()),
                           );
                         }
                       : null,
