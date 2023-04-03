@@ -3,7 +3,8 @@ import 'global.dart';
 import 'gallery.dart';
 
 class camera extends StatefulWidget {
-  const camera({super.key});
+  final String name;
+  const camera({super.key, required this.name});
 
   @override
   State<camera> createState() => _cameraState();
@@ -30,9 +31,9 @@ class _cameraState extends State<camera> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-                alignment: Alignment.center,
+                //alignment: Alignment.center,
                 //color: Colors.orange,
-                margin: const EdgeInsets.fromLTRB(0, 60, 0, 0),
+                margin: const EdgeInsets.fromLTRB(0, 65, 0, 0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   //crossAxisAlignment: CrossAxisAlignment.center,
@@ -59,7 +60,8 @@ class _cameraState extends State<camera> {
                   ],
                 )),
             Container(
-              margin: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+              margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+              //alignment: Alignment.center,
               //width: 353,
               width: MediaQuery.of(context).size.width * 0.86,
               //height: 573,
@@ -115,7 +117,8 @@ class _cameraState extends State<camera> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => const global()),
+                                        builder: (context) =>
+                                            global(name: widget.name)),
                                   );
                                 },
                                 child: Image.asset(

@@ -3,7 +3,8 @@ import 'package:flutter_app/camera.dart';
 import 'Home.dart';
 
 class Policy extends StatefulWidget {
-  const Policy({super.key});
+  final String name;
+  const Policy({super.key, required this.name});
 
   @override
   _PolicyState createState() => _PolicyState();
@@ -157,7 +158,8 @@ class _PolicyState extends State<Policy> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const camera()),
+                                builder: (context) =>
+                                    camera(name: widget.name)),
                           );
                         }
                       : null,

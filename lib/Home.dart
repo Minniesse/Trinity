@@ -218,8 +218,8 @@ class _HomeState extends State<Home> {
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const Policy()));
+                                              builder: (context) => Policy(
+                                                  name: _nameController.text)));
                                     });
                                   }
                                 : null,
