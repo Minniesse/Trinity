@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/about_us.dart';
 import 'gallery.dart';
 import 'camera.dart';
 
@@ -221,7 +222,7 @@ class _globalState extends State<global> {
                   margin: const EdgeInsets.fromLTRB(25, 25, 0, 0),
                   alignment: Alignment.topLeft,
                   child: const Text(
-                    "More",
+                    "Other actions",
                     style: TextStyle(
                         fontSize: 27,
                         fontFamily: 'SFpro',
@@ -276,48 +277,57 @@ class _globalState extends State<global> {
                 ),
                 Container(
                   margin: const EdgeInsets.fromLTRB(25, 15, 0, 0),
-                  child: Row(
-                    children: [
-                      Container(
-                        width: 47,
-                        height: 47,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          border: Border.all(
-                              width: 1,
-                              color: const Color.fromRGBO(224, 224, 224, 1)),
-                          image: const DecorationImage(
-                            image: AssetImage(
-                                'C:/Users/moski/Downloads/app/flutter_app/pic/human.png'),
-                            fit: BoxFit.contain,
-                          ),
-                          color: Colors.white,
+                  //color: Colors.orange,
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const about()),
+                      );
+                    },
+                    child: Row(
+                      children: [
+                        Container(
+                          width: 47,
+                          height: 47,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12),
+                              border: Border.all(
+                                  width: 1,
+                                  color:
+                                      const Color.fromRGBO(224, 224, 224, 1)),
+                              image: const DecorationImage(
+                                image: AssetImage(
+                                    'C:/Users/moski/Downloads/app/flutter_app/pic/human.png'),
+                                fit: BoxFit.contain,
+                              ),
+                              color: Colors.white),
                         ),
-                      ),
-                      Container(
-                          margin: const EdgeInsets.fromLTRB(15, 0, 0, 3),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
-                              Text(
-                                "About us",
-                                style: TextStyle(
-                                    fontSize: 23,
-                                    fontFamily: 'SFpro',
-                                    //fontWeight: FontWeight.bold,
-                                    color: Colors.black),
-                              ),
-                              Text(
-                                "Our story and our objectives and contacts.",
-                                style: TextStyle(
-                                    fontSize: 15,
-                                    fontFamily: 'SFpro',
-                                    //fontWeight: FontWeight.bold,
-                                    color: Color.fromRGBO(102, 102, 102, 1)),
-                              ),
-                            ],
-                          )),
-                    ],
+                        Container(
+                            margin: const EdgeInsets.fromLTRB(15, 0, 0, 3),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: const [
+                                Text(
+                                  "About us",
+                                  style: TextStyle(
+                                      fontSize: 23,
+                                      fontFamily: 'SFpro',
+                                      //fontWeight: FontWeight.bold,
+                                      color: Colors.black),
+                                ),
+                                Text(
+                                  "Our story and our objectives and contacts.",
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      fontFamily: 'SFpro',
+                                      //fontWeight: FontWeight.bold,
+                                      color: Color.fromRGBO(102, 102, 102, 1)),
+                                ),
+                              ],
+                            )),
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -378,13 +388,23 @@ class _globalState extends State<global> {
                           ),
                           Container(
                             margin: const EdgeInsets.fromLTRB(0, 5, 0, 0),
-                            child: Image.asset(
-                              "C:/Users/moski/Downloads/app/flutter_app/pic/home_icon.png",
-                              height:
-                                  MediaQuery.of(context).size.height * 0.045,
-                              // width: 27.18,
-                              // height: 28.37,
-                              fit: BoxFit.contain,
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          camera(name: widget.name)),
+                                );
+                              },
+                              child: Image.asset(
+                                "C:/Users/moski/Downloads/app/flutter_app/pic/home_icon.png",
+                                height:
+                                    MediaQuery.of(context).size.height * 0.045,
+                                // width: 27.18,
+                                // height: 28.37,
+                                fit: BoxFit.contain,
+                              ),
                             ),
                           ),
                           Container(
