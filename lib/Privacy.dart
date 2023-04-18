@@ -1,13 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/camera.dart';
+// import 'package:flutter_app/camera.dart';
+import 'camera.dart';
 import 'Home.dart';
+import 'package:camera/camera.dart';
 
 class Policy extends StatefulWidget {
-  final String name;
-  const Policy({super.key, required this.name});
+  final CameraDescription? camera;
+  final String name; // Add the name parameter
+
+  const Policy({Key? key, this.camera, required this.name}) : super(key: key);
 
   @override
   _PolicyState createState() => _PolicyState();
+}
+
+Future<void> camera(String name) async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final cameras = await availableCameras();
+  final firstCamera = cameras.first;
+
+  runApp(MaterialApp(
+    home: TakePictureScreen(
+      camera: firstCamera,
+      name: name,
+    ),
+  ));
 }
 
 class _PolicyState extends State<Policy> {
@@ -66,7 +83,7 @@ class _PolicyState extends State<Policy> {
                       alignment: Alignment.centerLeft,
                       margin: const EdgeInsets.fromLTRB(50, 0, 0, 0),
                       child: Image.asset(
-                        "C:/Users/moski/Downloads/app/flutter_app/pic/ppp.png",
+                        "pic/ppp.png",
                         width: MediaQuery.of(context).size.width * 0.37,
                         height: MediaQuery.of(context).size.height * 0.1,
                         fit: BoxFit.contain,
@@ -112,7 +129,7 @@ class _PolicyState extends State<Policy> {
                             height: MediaQuery.of(context).size.height * 0.04,
                             child: const FittedBox(
                               child: Text(
-                                "Privacy Policy\nLast updated: April 4, 2022",
+                                "Lorem Ipsum",
                                 style: TextStyle(
                                     color: Color.fromRGBO(70, 70, 70, 1),
                                     fontSize: 100,
@@ -155,12 +172,17 @@ class _PolicyState extends State<Policy> {
                 child: ElevatedButton(
                   onPressed: _isButtonEnabled
                       ? () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    camera(name: widget.name)),
-                          );
+                          camera(widget.name).then((_) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => TakePictureScreen(
+                                  camera: widget.camera,
+                                  name: widget.name,
+                                ),
+                              ),
+                            );
+                          });
                         }
                       : null,
                   style: ElevatedButton.styleFrom(
