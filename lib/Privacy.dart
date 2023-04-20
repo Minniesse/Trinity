@@ -4,6 +4,8 @@ import 'camera.dart';
 import 'Home.dart';
 import 'package:camera/camera.dart';
 
+import 'plant_recogniser.dart';
+
 class Policy extends StatefulWidget {
   final CameraDescription? camera;
   final String name; // Add the name parameter
@@ -20,7 +22,7 @@ Future<void> camera(String name) async {
   final firstCamera = cameras.first;
 
   runApp(MaterialApp(
-    home: TakePictureScreen(
+    home: PlantRecogniser(
       camera: firstCamera,
       name: name,
     ),
@@ -129,7 +131,7 @@ class _PolicyState extends State<Policy> {
                             height: MediaQuery.of(context).size.height * 0.04,
                             child: const FittedBox(
                               child: Text(
-                                "Lorem Ipsum",
+                                "Privacy Policy\nLast updated: April 4, 2022",
                                 style: TextStyle(
                                     color: Color.fromRGBO(70, 70, 70, 1),
                                     fontSize: 100,
@@ -176,7 +178,7 @@ class _PolicyState extends State<Policy> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => TakePictureScreen(
+                                builder: (context) => PlantRecogniser(
                                   camera: widget.camera,
                                   name: widget.name,
                                 ),

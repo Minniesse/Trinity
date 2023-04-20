@@ -4,6 +4,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'camera.dart';
 import 'global.dart';
 import 'package:camera/camera.dart';
+import 'plant_recogniser.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class gallery extends StatefulWidget {
   final String name;
@@ -20,7 +23,7 @@ Future<void> camera(String name) async {
   final firstCamera = cameras.first;
 
   runApp(MaterialApp(
-    home: TakePictureScreen(
+    home: PlantRecogniser(
       camera: firstCamera,
       name: name,
     ),
@@ -33,7 +36,15 @@ class _GalleryState extends State<gallery> {
   @override
   void initState() {
     super.initState();
+    _initializeFirebase();
     _loadImages();
+  }
+
+  Future<void> _initializeFirebase() async {
+    await Firebase.initializeApp().whenComplete(() {
+      print("completed");
+      setState(() {});
+    });
   }
 
   Future<void> _loadImages() async {
@@ -182,8 +193,7 @@ class _GalleryState extends State<gallery> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) =>
-                                              TakePictureScreen(
+                                          builder: (context) => PlantRecogniser(
                                                 camera: widget.camera,
                                                 name: widget.name,
                                               )),

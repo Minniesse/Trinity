@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "839805802341",
+    "project_id": "tinity-73d37",
+    "storage_bucket": "tinity-73d37.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:839805802341:android:ca6dd10f329f088783338c",
+        "android_client_info": {
+          "package_name": "com.example.flutter_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "839805802341-ammb6t81tgeuddntmfr3t1di0aikv4ep.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCB0Av5P-3CuibmszXR97L5OaMUjNBdf8s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "839805802341-9qki50tj2h3mfoupmgq821sjp1dtqrae.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,10 @@
+0 Ceramics 
+1 Glass
+2 Kitchenware
+3 Light bulb
+4 Metal
+5 Paper
+6 Photographs
+7 Plastic
+8 Styrofoams
+9 Wood

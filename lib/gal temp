@@ -1,0 +1,72 @@
+// ...
+
+Row(
+  mainAxisAlignment: MainAxisAlignment.end,
+  children: [
+    GestureDetector(
+      onTap: () {
+        // Handle the wrong button tap event here
+        setState(() {
+          _selectedCard = _getNewCard(); // Get the new card here
+        });
+      },
+      child: Container(
+        padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+        child: Image.asset(
+          "pic/wrong_but.png",
+          height: MediaQuery.of(context).size.height * 0.05,
+          fit: BoxFit.contain,
+        ),
+      ),
+    ),
+    GestureDetector(
+      onTap: () {
+        // Handle the correct button tap event here
+        setState(() {
+          _selectedCard = _getNewCard(); // Get the new card here
+        });
+      },
+      child: Container(
+        margin: const EdgeInsets.fromLTRB(0, 0, 30, 0),
+        child: Image.asset(
+          "pic/cor_but.png",
+          height: MediaQuery.of(context).size.height * 0.05,
+          fit: BoxFit.contain,
+        ),
+      ),
+    ),
+  ],
+),
+
+// ...
+
+AnimatedSwitcher(
+  duration: const Duration(milliseconds: 300),
+  transitionBuilder: (Widget child, Animation<double> animation) {
+    final inAnimation = Tween<Offset>(
+      begin: const Offset(1.0, 0.0),
+      end: Offset.zero,
+    ).animate(animation);
+    final outAnimation = Tween<Offset>(
+      begin: Offset.zero,
+      end: const Offset(-1.0, 0.0),
+    ).animate(animation);
+
+    if (child.key == ValueKey(_selectedCard)) {
+      return ClipRect(
+        child: SlideTransition(
+          position: inAnimation,
+          child: child,
+        ),
+      );
+    } else {
+      return ClipRect(
+        child: SlideTransition(
+          position: outAnimation,
+          child: child,
+        ),
+      );
+    }
+  },
+  child: _selectedCard, // This should be a widget representing the card with a unique key
+),

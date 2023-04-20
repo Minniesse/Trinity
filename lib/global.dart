@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'gallery.dart';
 import 'camera.dart';
 import 'package:camera/camera.dart';
+import 'plant_recogniser.dart';
 
 class global extends StatefulWidget {
   final String name;
@@ -18,7 +19,7 @@ Future<void> camera(String name) async {
   final firstCamera = cameras.first;
 
   runApp(MaterialApp(
-    home: TakePictureScreen(
+    home: PlantRecogniser(
       camera: firstCamera,
       name: name,
     ),
@@ -399,8 +400,7 @@ class _globalState extends State<global> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) =>
-                                              TakePictureScreen(
+                                          builder: (context) => PlantRecogniser(
                                                 camera: widget.camera,
                                                 name: widget.name,
                                               )),
