@@ -38,14 +38,14 @@ class _globalState extends State<global> {
         ),
       ),
       Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.center,
         //crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            margin: const EdgeInsets.fromLTRB(0, 70, 0, 0),
-            width: double.infinity,
-            height: MediaQuery.of(context).size.height * 0.3,
+            margin: const EdgeInsets.fromLTRB(0, 40, 0, 0),
+            //width: double.infinity,
+            //height: MediaQuery.of(context).size.height * 0.3,
             //color: Colors.orange,
             child: Stack(
               children: [
@@ -148,7 +148,7 @@ class _globalState extends State<global> {
           Container(
             margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
             width: 362,
-            height: 151,
+            height: MediaQuery.of(context).size.height * 0.17,
             decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(
@@ -209,7 +209,7 @@ class _globalState extends State<global> {
             ),
           ),
           Container(
-            margin: const EdgeInsets.fromLTRB(0, 15, 0, 0),
+            margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
             width: 362,
             height: 212,
             decoration: BoxDecoration(
@@ -340,13 +340,13 @@ class _globalState extends State<global> {
             ),
           ),
           Container(
-              width: MediaQuery.of(context).size.width * 0.93,
-              height: MediaQuery.of(context).size.height * 0.15,
+              // width: MediaQuery.of(context).size.width * 0.93,
+              // height: MediaQuery.of(context).size.height * 0.15,
               alignment: Alignment.bottomCenter,
               child: Stack(
                 children: [
                   Container(
-                    margin: const EdgeInsets.fromLTRB(0, 0, 6, 40),
+                    margin: const EdgeInsets.fromLTRB(0, 0, 6, 20),
                     width: 375,
                     height: 89.29,
                     decoration: BoxDecoration(

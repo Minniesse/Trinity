@@ -106,12 +106,12 @@ class _PlantRecogniserState extends State<PlantRecogniser>
     }
   }
 
-  //for firebase that is plastic
-  Future<void> _uploadImage_plastic(File imageFile) async {
+  //for firebase that is plastic_F
+  Future<void> _uploadImage_plastic_F(File imageFile) async {
     try {
       String fileName = DateTime.now().millisecondsSinceEpoch.toString();
       FirebaseStorage storage = FirebaseStorage.instance;
-      Reference ref = storage.ref().child('images/$fileName');
+      Reference ref = storage.ref().child('Wrong/Plastic_F/$fileName');
       UploadTask uploadTask = ref.putFile(imageFile);
       await uploadTask.whenComplete(() => print('Image uploaded successfully'));
     } catch (e) {
@@ -119,12 +119,12 @@ class _PlantRecogniserState extends State<PlantRecogniser>
     }
   }
 
-  //for firebase that is paper
-  Future<void> _uploadImage_paper(File imageFile) async {
+  //for firebase that is paper_F
+  Future<void> _uploadImage_paper_F(File imageFile) async {
     try {
       String fileName = DateTime.now().millisecondsSinceEpoch.toString();
       FirebaseStorage storage = FirebaseStorage.instance;
-      Reference ref = storage.ref().child('images/$fileName');
+      Reference ref = storage.ref().child('Wrong/Paper_F/$fileName');
       UploadTask uploadTask = ref.putFile(imageFile);
       await uploadTask.whenComplete(() => print('Image uploaded successfully'));
     } catch (e) {
@@ -132,12 +132,12 @@ class _PlantRecogniserState extends State<PlantRecogniser>
     }
   }
 
-  //for firebase that is glass
-  Future<void> _uploadImage_glass(File imageFile) async {
+  //for firebase that is glass_F
+  Future<void> _uploadImage_glass_F(File imageFile) async {
     try {
       String fileName = DateTime.now().millisecondsSinceEpoch.toString();
       FirebaseStorage storage = FirebaseStorage.instance;
-      Reference ref = storage.ref().child('images/$fileName');
+      Reference ref = storage.ref().child('Wrong/Glass_F/$fileName');
       UploadTask uploadTask = ref.putFile(imageFile);
       await uploadTask.whenComplete(() => print('Image uploaded successfully'));
     } catch (e) {
@@ -145,12 +145,93 @@ class _PlantRecogniserState extends State<PlantRecogniser>
     }
   }
 
-  //for firebase that is metal
-  Future<void> _uploadImage_metal(File imageFile) async {
+  //for firebase that is metal_F
+  Future<void> _uploadImage_metal_F(File imageFile) async {
     try {
       String fileName = DateTime.now().millisecondsSinceEpoch.toString();
       FirebaseStorage storage = FirebaseStorage.instance;
-      Reference ref = storage.ref().child('images/$fileName');
+      Reference ref = storage.ref().child('Wrong/Metal_F/$fileName');
+      UploadTask uploadTask = ref.putFile(imageFile);
+      await uploadTask.whenComplete(() => print('Image uploaded successfully'));
+    } catch (e) {
+      print('Error uploading image: $e');
+    }
+  }
+
+  //for firebase for not sure
+  Future<void> _uploadImage_Others_F(File imageFile) async {
+    try {
+      String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+      FirebaseStorage storage = FirebaseStorage.instance;
+      Reference ref = storage.ref().child('Wrong/Others_F/$fileName');
+      UploadTask uploadTask = ref.putFile(imageFile);
+      await uploadTask.whenComplete(() => print('Image uploaded successfully'));
+    } catch (e) {
+      print('Error uploading image: $e');
+    }
+  }
+
+  //for firebase that is plastic_T
+  Future<void> _uploadImage_plastic_T(File imageFile) async {
+    try {
+      String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+      FirebaseStorage storage = FirebaseStorage.instance;
+      Reference ref = storage.ref().child('Correct/Plastic_T/$fileName');
+      UploadTask uploadTask = ref.putFile(imageFile);
+      await uploadTask.whenComplete(() => print('Image uploaded successfully'));
+    } catch (e) {
+      print('Error uploading image: $e');
+    }
+  }
+
+  //for firebase that is paper_T
+  Future<void> _uploadImage_paper_T(File imageFile) async {
+    try {
+      String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+      FirebaseStorage storage = FirebaseStorage.instance;
+      Reference ref = storage.ref().child('Correct/Paper_T/$fileName');
+      UploadTask uploadTask = ref.putFile(imageFile);
+      await uploadTask.whenComplete(() => print('Image uploaded successfully'));
+    } catch (e) {
+      print('Error uploading image: $e');
+    }
+  }
+
+  //for firebase that is glass_T
+  Future<void> _uploadImage_glass_T(File imageFile) async {
+    try {
+      String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+      FirebaseStorage storage = FirebaseStorage.instance;
+      Reference ref =
+          storage.ref().child('Correct/Glass_T/$fileName'); //glass_T
+      UploadTask uploadTask = ref.putFile(imageFile);
+      await uploadTask.whenComplete(() => print('Image uploaded successfully'));
+    } catch (e) {
+      print('Error uploading image: $e');
+    }
+  }
+
+  //for firebase that is metal_T
+  Future<void> _uploadImage_metal_T(File imageFile) async {
+    try {
+      String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+      FirebaseStorage storage = FirebaseStorage.instance;
+      Reference ref =
+          storage.ref().child('Correct/Metal_T/$fileName'); //glass_T
+      UploadTask uploadTask = ref.putFile(imageFile);
+      await uploadTask.whenComplete(() => print('Image uploaded successfully'));
+    } catch (e) {
+      print('Error uploading image: $e');
+    }
+  }
+
+  //for firebase that is others_T
+  Future<void> _uploadImage_Others_T(File imageFile) async {
+    try {
+      String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+      FirebaseStorage storage = FirebaseStorage.instance;
+      Reference ref =
+          storage.ref().child('Correct/Others_T/$fileName'); //glass_T
       UploadTask uploadTask = ref.putFile(imageFile);
       await uploadTask.whenComplete(() => print('Image uploaded successfully'));
     } catch (e) {
@@ -349,13 +430,13 @@ class _PlantRecogniserState extends State<PlantRecogniser>
                 ),
               ),
               Container(
-                  width: MediaQuery.of(context).size.width * 0.93,
-                  height: MediaQuery.of(context).size.height * 0.15,
+                  // width: MediaQuery.of(context).size.width * 0.93,
+                  // height: MediaQuery.of(context).size.height * 0.15,
                   alignment: Alignment.bottomCenter,
                   child: Stack(
                     children: [
                       Container(
-                        margin: const EdgeInsets.fromLTRB(0, 0, 6, 40),
+                        margin: const EdgeInsets.fromLTRB(0, 0, 0, 20),
                         width: 375,
                         height: 89.29,
                         decoration: BoxDecoration(
@@ -553,9 +634,9 @@ class _PlantRecogniserState extends State<PlantRecogniser>
                 position: _originalContainerAnimation,
                 child: Container(
                   margin: const EdgeInsets.fromLTRB(0, 0, 0, 10),
-                  child: FractionallySizedBox(
-                    widthFactor: MediaQuery.of(context).size.width / 475,
-                    heightFactor: 0.45,
+                  child: Container(
+                    width: MediaQuery.of(context).size.width * 0.87,
+                    height: MediaQuery.of(context).size.height * 0.45,
                     child: ClipRRect(
                       borderRadius: const BorderRadius.all(
                         Radius.circular(34),
@@ -598,7 +679,7 @@ class _PlantRecogniserState extends State<PlantRecogniser>
                             ),
                             Column(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                              //crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Row(
                                   mainAxisAlignment:
@@ -609,7 +690,7 @@ class _PlantRecogniserState extends State<PlantRecogniser>
                                       children: [
                                         Container(
                                           margin: const EdgeInsets.fromLTRB(
-                                              30, 28, 0, 0),
+                                              30, 35, 0, 0),
                                           alignment: Alignment.topLeft,
                                           child: Text(
                                             title,
@@ -654,9 +735,6 @@ class _PlantRecogniserState extends State<PlantRecogniser>
                                         Container(
                                           padding: const EdgeInsets.fromLTRB(
                                               0, 0, 10, 0),
-                                          // margin:
-                                          //     const EdgeInsets.fromLTRB(40, 0, 0, 0),
-                                          //alignment: Alignment.topRight,
                                           child: GestureDetector(
                                             onTap: () {
                                               _slideController.forward();
@@ -677,16 +755,86 @@ class _PlantRecogniserState extends State<PlantRecogniser>
                                           //alignment: Alignment.topRight,
                                           child: GestureDetector(
                                             onTap: () async {
-                                              await _initializeControllerFuture;
-                                              final image =
-                                                  await _cameraController
-                                                      .takePicture();
-                                              final imagePath =
-                                                  await _saveImageAndNavigate(
-                                                      image);
-                                              await _uploadImage(
-                                                  File(imagePath));
-                                              Navigator.pop(context);
+                                              bool isPlastic =
+                                                  title == "Plastic";
+                                              bool isPaper = title == "Paper";
+                                              bool isGlass = title == "Glass";
+                                              bool isMetal = title == "Metal";
+                                              bool isOthers = title ==
+                                                  "Ceramics"
+                                                      "Kitchenware"
+                                                      "Light bulb"
+                                                      "Photographs"
+                                                      "Styrofoams"
+                                                      "Wood";
+                                              if (isPlastic) {
+                                                Navigator.pop(context);
+                                                await _initializeControllerFuture;
+                                                final image =
+                                                    await _cameraController
+                                                        .takePicture();
+                                                final imagePath =
+                                                    await _saveImageAndNavigate(
+                                                        image);
+                                                await _uploadImage_plastic_T(
+                                                    File(imagePath));
+                                                debugPrint("success upload");
+                                              }
+                                              if (isPaper) {
+                                                Navigator.pop(context);
+                                                await _initializeControllerFuture;
+                                                final image =
+                                                    await _cameraController
+                                                        .takePicture();
+                                                final imagePath =
+                                                    await _saveImageAndNavigate(
+                                                        image);
+                                                await _uploadImage_paper_T(
+                                                    File(imagePath));
+                                                debugPrint("success upload");
+                                              }
+                                              if (isGlass) {
+                                                Navigator.pop(context);
+                                                await _initializeControllerFuture;
+                                                final image =
+                                                    await _cameraController
+                                                        .takePicture();
+                                                final imagePath =
+                                                    await _saveImageAndNavigate(
+                                                        image);
+                                                await _uploadImage_glass_T(
+                                                    File(imagePath));
+                                                debugPrint("success upload");
+                                              }
+                                              if (isMetal) {
+                                                Navigator.pop(context);
+                                                await _initializeControllerFuture;
+                                                final image =
+                                                    await _cameraController
+                                                        .takePicture();
+                                                final imagePath =
+                                                    await _saveImageAndNavigate(
+                                                        image);
+                                                await _uploadImage_metal_T(
+                                                    File(imagePath));
+                                                debugPrint("success upload");
+                                              }
+                                              if (isOthers) {
+                                                Navigator.pop(context);
+                                                await _initializeControllerFuture;
+                                                final image =
+                                                    await _cameraController
+                                                        .takePicture();
+                                                final imagePath =
+                                                    await _saveImageAndNavigate(
+                                                        image);
+                                                await _uploadImage_Others_T(
+                                                    File(imagePath));
+                                                debugPrint("success upload");
+                                              } else {
+                                                debugPrint("error");
+                                                debugPrint(_plantLabel);
+                                              }
                                             },
                                             child: Image.asset(
                                               "pic/cor_but.png",
@@ -716,82 +864,85 @@ class _PlantRecogniserState extends State<PlantRecogniser>
                                         height: 1),
                                   ),
                                 ),
-                                Row(
-                                  children: [
-                                    Container(
-                                        margin: const EdgeInsets.fromLTRB(
-                                            25, 20, 0, 0),
-                                        alignment: Alignment.topLeft,
-                                        child: Image.asset(
-                                          "C:/Users/moski/Downloads/app/flutter_app/pic/Tri_ai.png",
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.12,
-                                          //height: MediaQuery.of(context).size.height * 0.28,
-                                        )),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      //crossAxisAlignment: CrossAxisAlignment.end,
-                                      children: [
-                                        Container(
-                                          alignment: Alignment.centerLeft,
-                                          margin: const EdgeInsets.fromLTRB(
-                                              3, 14, 0, 0),
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Container(
-                                                  margin:
-                                                      const EdgeInsets.fromLTRB(
-                                                          0, 0, 0, 0),
-                                                  alignment: Alignment.topLeft,
-                                                  child: const Text(
-                                                      "Powered by",
-                                                      style: TextStyle(
-                                                          color: Color.fromRGBO(
-                                                              173, 173, 179, 1),
-                                                          fontFamily: "SFpro",
-                                                          fontSize: 14,
-                                                          fontWeight: FontWeight
-                                                              .w500))),
-                                              Container(
-                                                  margin:
-                                                      const EdgeInsets.fromLTRB(
-                                                          0, 0, 0, 0),
-                                                  alignment: Alignment.topLeft,
-                                                  child: const Text(
-                                                      "Trinity AI",
-                                                      style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontFamily: "SFpro",
-                                                          fontSize: 14,
-                                                          fontWeight: FontWeight
-                                                              .w600))),
-                                            ],
-                                          ),
-                                        ),
-                                        Container(
-                                          margin: const EdgeInsets.fromLTRB(
-                                              100, 20, 0, 0),
-                                          child: const Text("Learn more >",
-                                              style: TextStyle(
-                                                  color: Color.fromRGBO(
-                                                      173, 173, 179, 1),
-                                                  fontFamily: "SFpro",
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w500)),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
                               ],
                             ),
+                            Expanded(
+                                child: Container(
+                              alignment: Alignment.center,
+                              margin: const EdgeInsets.fromLTRB(25, 0, 0, 0),
+                              child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      alignment: Alignment.center,
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.05,
+                                      child: Image.asset(
+                                        "C:/Users/moski/Downloads/app/flutter_app/pic/Tri_ai.png",
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    Container(
+                                        alignment: Alignment.center,
+                                        margin:
+                                            EdgeInsets.fromLTRB(0, 0, 0, 15),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Container(
+                                              margin: const EdgeInsets.fromLTRB(
+                                                  0, 10, 0, 0),
+                                              alignment: Alignment.center,
+                                              child: const Text(
+                                                "Powered by",
+                                                style: TextStyle(
+                                                    color: Color.fromRGBO(
+                                                        151, 151, 151, 1),
+                                                    fontFamily: "SFpro",
+                                                    fontSize: 13,
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                              ),
+                                            ),
+                                            Container(
+                                              padding:
+                                                  const EdgeInsets.fromLTRB(
+                                                      0, 0, 0, 0),
+                                              alignment: Alignment.center,
+                                              child: const Text(
+                                                "Trinity AI",
+                                                style: TextStyle(
+                                                    color: Color.fromRGBO(
+                                                        255, 255, 255, 1),
+                                                    fontFamily: "SFpro",
+                                                    fontSize: 13,
+                                                    fontWeight:
+                                                        FontWeight.w600),
+                                              ),
+                                            ),
+                                          ],
+                                        )),
+                                    Expanded(
+                                        child: Container(
+                                      margin: const EdgeInsets.fromLTRB(
+                                          0, 0, 25, 0),
+                                      alignment: Alignment.centerRight,
+                                      //color: Colors.orange,
+                                      child: const Text("Learn More>",
+                                          style: TextStyle(
+                                              color: Color.fromRGBO(
+                                                  151, 151, 151, 1),
+                                              fontFamily: "SFpro",
+                                              fontSize: 13,
+                                              fontWeight: FontWeight.w500)),
+                                    )),
+                                  ]),
+                            ))
                           ],
                         ),
                       ),
@@ -806,9 +957,9 @@ class _PlantRecogniserState extends State<PlantRecogniser>
                 position: _newContainerAnimation,
                 child: Container(
                   margin: const EdgeInsets.fromLTRB(0, 0, 0, 10),
-                  child: FractionallySizedBox(
-                    widthFactor: MediaQuery.of(context).size.width / 475,
-                    heightFactor: 0.45,
+                  child: Container(
+                    width: MediaQuery.of(context).size.width * 0.87,
+                    height: MediaQuery.of(context).size.height * 0.45,
                     child: ClipRRect(
                       borderRadius: const BorderRadius.all(
                         Radius.circular(34),
@@ -820,33 +971,21 @@ class _PlantRecogniserState extends State<PlantRecogniser>
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
-                              margin: const EdgeInsets.fromLTRB(300, 20, 10, 0),
-                              child: GestureDetector(
-                                onTap: () {
-                                  Navigator.pop(context);
-                                },
-                                child: Image.asset(
-                                  "pic/close_but.png",
-                                  height: 35,
-                                  width: 35,
-                                  fit: BoxFit.contain,
-                                ),
-                              ),
-                            ),
+                                margin: const EdgeInsets.fromLTRB(30, 40, 0, 0),
+                                width: MediaQuery.of(context).size.width * 0.45,
+                                child: const FittedBox(
+                                  child: Text(
+                                    "We’re sorry\nto hear that.",
+                                    style: TextStyle(
+                                        color: Color.fromRGBO(101, 101, 101, 1),
+                                        fontFamily: "SFpro",
+                                        fontSize: 32,
+                                        fontWeight: FontWeight.w600,
+                                        height: 1.1),
+                                  ),
+                                )),
                             Container(
-                              margin: const EdgeInsets.fromLTRB(30, 0, 0, 0),
-                              child: const Text(
-                                "We’re sorry\nto hear that.",
-                                style: TextStyle(
-                                    color: Color.fromRGBO(101, 101, 101, 1),
-                                    fontFamily: "SFpro",
-                                    fontSize: 32,
-                                    fontWeight: FontWeight.w600,
-                                    height: 1.1),
-                              ),
-                            ),
-                            Container(
-                              margin: const EdgeInsets.fromLTRB(30, 10, 0, 0),
+                              margin: const EdgeInsets.fromLTRB(30, 6, 0, 0),
                               child: const Text(
                                 "Could you give me the suggestions?",
                                 style: TextStyle(
@@ -862,7 +1001,8 @@ class _PlantRecogniserState extends State<PlantRecogniser>
                                       const EdgeInsets.fromLTRB(0, 15, 0, 0),
                                   alignment: Alignment.center,
                                   height: 38,
-                                  width: 299,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.72,
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(26),
@@ -871,15 +1011,27 @@ class _PlantRecogniserState extends State<PlantRecogniser>
                                       width: 2.14,
                                     ),
                                   ),
-                                  child: const Text("I'm not sure",
-                                      style: TextStyle(
-                                        color: Color.fromRGBO(175, 105, 0, 1),
-                                        fontFamily: "Inter",
-                                        fontSize: 20,
-                                      ))),
+                                  child: GestureDetector(
+                                      onTap: () async {
+                                        Navigator.pop(context);
+                                        await _initializeControllerFuture;
+                                        final image = await _cameraController
+                                            .takePicture();
+                                        final imagePath =
+                                            await _saveImageAndNavigate(image);
+                                        await _uploadImage_Others_F(
+                                            File(imagePath));
+                                      },
+                                      child: const Text("I'm not sure",
+                                          style: TextStyle(
+                                            color:
+                                                Color.fromRGBO(175, 105, 0, 1),
+                                            fontFamily: "Inter",
+                                            fontSize: 20,
+                                          )))),
                             ),
                             Container(
-                              margin: const EdgeInsets.fromLTRB(30, 20, 30, 0),
+                              margin: const EdgeInsets.fromLTRB(30, 15, 30, 0),
                               child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -900,13 +1052,26 @@ class _PlantRecogniserState extends State<PlantRecogniser>
                                             width: 2.14,
                                           ),
                                         ),
-                                        child: const Text("Plastic",
-                                            style: TextStyle(
-                                              color: Color.fromRGBO(
-                                                  175, 105, 0, 1),
-                                              fontFamily: "Inter",
-                                              fontSize: 20,
-                                            ))),
+                                        child: GestureDetector(
+                                            onTap: () async {
+                                              Navigator.pop(context);
+                                              await _initializeControllerFuture;
+                                              final image =
+                                                  await _cameraController
+                                                      .takePicture();
+                                              final imagePath =
+                                                  await _saveImageAndNavigate(
+                                                      image);
+                                              await _uploadImage_plastic_F(
+                                                  File(imagePath));
+                                            },
+                                            child: const Text("Plastic",
+                                                style: TextStyle(
+                                                  color: Color.fromRGBO(
+                                                      175, 105, 0, 1),
+                                                  fontFamily: "Inter",
+                                                  fontSize: 20,
+                                                )))),
                                     Container(
                                         padding: const EdgeInsets.fromLTRB(
                                             0, 0, 0, 0),
@@ -922,17 +1087,30 @@ class _PlantRecogniserState extends State<PlantRecogniser>
                                             width: 2.14,
                                           ),
                                         ),
-                                        child: const Text("Paper",
-                                            style: TextStyle(
-                                              color: Color.fromRGBO(
-                                                  175, 105, 0, 1),
-                                              fontFamily: "Inter",
-                                              fontSize: 20,
-                                            ))),
+                                        child: GestureDetector(
+                                            onTap: () async {
+                                              Navigator.pop(context);
+                                              await _initializeControllerFuture;
+                                              final image =
+                                                  await _cameraController
+                                                      .takePicture();
+                                              final imagePath =
+                                                  await _saveImageAndNavigate(
+                                                      image);
+                                              await _uploadImage_paper_F(
+                                                  File(imagePath));
+                                            },
+                                            child: const Text("Paper",
+                                                style: TextStyle(
+                                                  color: Color.fromRGBO(
+                                                      175, 105, 0, 1),
+                                                  fontFamily: "Inter",
+                                                  fontSize: 20,
+                                                )))),
                                   ]),
                             ),
                             Container(
-                              margin: const EdgeInsets.fromLTRB(30, 20, 30, 0),
+                              margin: const EdgeInsets.fromLTRB(30, 15, 30, 0),
                               child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -953,13 +1131,26 @@ class _PlantRecogniserState extends State<PlantRecogniser>
                                             width: 2.14,
                                           ),
                                         ),
-                                        child: const Text("Metal",
-                                            style: TextStyle(
-                                              color: Color.fromRGBO(
-                                                  175, 105, 0, 1),
-                                              fontFamily: "Inter",
-                                              fontSize: 20,
-                                            ))),
+                                        child: GestureDetector(
+                                            onTap: () async {
+                                              Navigator.pop(context);
+                                              await _initializeControllerFuture;
+                                              final image =
+                                                  await _cameraController
+                                                      .takePicture();
+                                              final imagePath =
+                                                  await _saveImageAndNavigate(
+                                                      image);
+                                              await _uploadImage_metal_F(
+                                                  File(imagePath));
+                                            },
+                                            child: const Text("Metal",
+                                                style: TextStyle(
+                                                  color: Color.fromRGBO(
+                                                      175, 105, 0, 1),
+                                                  fontFamily: "Inter",
+                                                  fontSize: 20,
+                                                )))),
                                     Container(
                                         padding: const EdgeInsets.fromLTRB(
                                             0, 0, 0, 0),
@@ -975,23 +1166,42 @@ class _PlantRecogniserState extends State<PlantRecogniser>
                                             width: 2.14,
                                           ),
                                         ),
-                                        child: const Text("Glass",
-                                            style: TextStyle(
-                                              color: Color.fromRGBO(
-                                                  175, 105, 0, 1),
-                                              fontFamily: "Inter",
-                                              fontSize: 20,
-                                            ))),
+                                        child: GestureDetector(
+                                            onTap: () async {
+                                              Navigator.pop(context);
+                                              await _initializeControllerFuture;
+                                              final image =
+                                                  await _cameraController
+                                                      .takePicture();
+                                              final imagePath =
+                                                  await _saveImageAndNavigate(
+                                                      image);
+                                              await _uploadImage_glass_F(
+                                                  File(imagePath));
+                                            },
+                                            child: const Text("Glass",
+                                                style: TextStyle(
+                                                  color: Color.fromRGBO(
+                                                      175, 105, 0, 1),
+                                                  fontFamily: "Inter",
+                                                  fontSize: 20,
+                                                )))),
                                   ]),
                             ),
-                            Center(
+                            Expanded(
                               child: Container(
-                                margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
-                                height: 52,
-                                width: 52,
-                                child: Image.asset(
-                                  "pic/reverse_but.png",
-                                  fit: BoxFit.contain,
+                                padding: EdgeInsets.all(5),
+                                alignment: Alignment.center,
+                                child: GestureDetector(
+                                  onTap: () async {
+                                    _slideController.reverse();
+                                  },
+                                  child: Image.asset(
+                                    "pic/reverse_but.png",
+                                    height: MediaQuery.of(context).size.height *
+                                        0.06,
+                                    fit: BoxFit.contain,
+                                  ),
                                 ),
                               ),
                             ),

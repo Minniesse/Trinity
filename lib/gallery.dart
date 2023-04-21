@@ -128,13 +128,13 @@ class _GalleryState extends State<gallery> {
               ),
             ),
             Container(
-                width: MediaQuery.of(context).size.width * 0.93,
-                height: MediaQuery.of(context).size.height * 0.15,
+                // width: MediaQuery.of(context).size.width * 0.93,
+                // height: MediaQuery.of(context).size.height * 0.15,
                 alignment: Alignment.bottomCenter,
                 child: Stack(
                   children: [
                     Container(
-                      margin: const EdgeInsets.fromLTRB(0, 0, 6, 40),
+                      margin: const EdgeInsets.fromLTRB(0, 0, 0, 37),
                       width: 375,
                       height: 89.29,
                       decoration: BoxDecoration(
