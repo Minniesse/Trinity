@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'camera.dart';
 import 'global.dart';
 import 'package:camera/camera.dart';
 import 'plant_recogniser.dart';

@@ -7,7 +7,6 @@ import 'package:flutter_launcher_icons/xml_templates.dart';
 import 'package:image/image.dart' as img;
 import 'package:image_picker/image_picker.dart';
 import 'package:camera/camera.dart';
-import 'camera.dart';
 import '../classifier/classifier.dart';
 import '../styles.dart';
 import 'gallery.dart';
@@ -18,6 +17,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 const _labelsFileName = 'assets/labels.txt';
 const _modelFileName = 'model_unquant.tflite';
@@ -53,6 +53,16 @@ Future<void> camera(String name) async {
       name: name,
     ),
   ));
+}
+
+void _incrementCounter() async {
+  // Reference to the Firestore document
+  DocumentReference counterRef =
+      FirebaseFirestore.instance.collection('counter').doc('clickCount');
+
+  // Increment the 'count' field value by 1
+  await counterRef.update({'count': FieldValue.increment(1)});
+  print('Incremented click count');
 }
 
 class _PlantRecogniserState extends State<PlantRecogniser>
@@ -239,6 +249,12 @@ class _PlantRecogniserState extends State<PlantRecogniser>
     }
   }
 
+  //permissiontosendpicsetting
+  Future<bool> _fetchButtonState() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('buttonEnabled') ?? true;
+  }
+
   @override
   void initState() {
     super.initState();
@@ -415,6 +431,7 @@ class _PlantRecogniserState extends State<PlantRecogniser>
                           final image = await _cameraController.takePicture();
                           final imagePath = await VariableforPredict(image);
                           await _captureAndAnalyze(imagePath);
+                          _incrementCounter();
                           //await _uploadImage(File(imagePath));
                         },
                         child: Container(
@@ -754,87 +771,110 @@ class _PlantRecogniserState extends State<PlantRecogniser>
                                               0, 0, 30, 0),
                                           //alignment: Alignment.topRight,
                                           child: GestureDetector(
-                                            onTap: () async {
-                                              bool isPlastic =
-                                                  title == "Plastic";
-                                              bool isPaper = title == "Paper";
-                                              bool isGlass = title == "Glass";
-                                              bool isMetal = title == "Metal";
-                                              bool isOthers = title ==
-                                                  "Ceramics"
-                                                      "Kitchenware"
-                                                      "Light bulb"
-                                                      "Photographs"
-                                                      "Styrofoams"
-                                                      "Wood";
-                                              if (isPlastic) {
-                                                Navigator.pop(context);
-                                                await _initializeControllerFuture;
-                                                final image =
-                                                    await _cameraController
-                                                        .takePicture();
-                                                final imagePath =
-                                                    await _saveImageAndNavigate(
-                                                        image);
-                                                await _uploadImage_plastic_T(
-                                                    File(imagePath));
-                                                debugPrint("success upload");
-                                              }
-                                              if (isPaper) {
-                                                Navigator.pop(context);
-                                                await _initializeControllerFuture;
-                                                final image =
-                                                    await _cameraController
-                                                        .takePicture();
-                                                final imagePath =
-                                                    await _saveImageAndNavigate(
-                                                        image);
-                                                await _uploadImage_paper_T(
-                                                    File(imagePath));
-                                                debugPrint("success upload");
-                                              }
-                                              if (isGlass) {
-                                                Navigator.pop(context);
-                                                await _initializeControllerFuture;
-                                                final image =
-                                                    await _cameraController
-                                                        .takePicture();
-                                                final imagePath =
-                                                    await _saveImageAndNavigate(
-                                                        image);
-                                                await _uploadImage_glass_T(
-                                                    File(imagePath));
-                                                debugPrint("success upload");
-                                              }
-                                              if (isMetal) {
-                                                Navigator.pop(context);
-                                                await _initializeControllerFuture;
-                                                final image =
-                                                    await _cameraController
-                                                        .takePicture();
-                                                final imagePath =
-                                                    await _saveImageAndNavigate(
-                                                        image);
-                                                await _uploadImage_metal_T(
-                                                    File(imagePath));
-                                                debugPrint("success upload");
-                                              }
-                                              if (isOthers) {
-                                                Navigator.pop(context);
-                                                await _initializeControllerFuture;
-                                                final image =
-                                                    await _cameraController
-                                                        .takePicture();
-                                                final imagePath =
-                                                    await _saveImageAndNavigate(
-                                                        image);
-                                                await _uploadImage_Others_T(
-                                                    File(imagePath));
-                                                debugPrint("success upload");
-                                              } else {
-                                                debugPrint("error");
-                                                debugPrint(_plantLabel);
-                                              }
+                                            onTap: () {
+                                              _fetchButtonState()
+                                                  .then((buttonEnabled) async {
+                                                if (buttonEnabled) {
+                                                  bool isPlastic =
+                                                      title == "Plastic";
+                                                  bool isPaper =
+                                                      title == "Paper";
+                                                  bool isGlass =
+                                                      title == "Glass";
+                                                  bool isMetal =
+                                                      title == "Metal";
+                                                  bool isOthers = title ==
+                                                      "Ceramics"
+                                                          "Kitchenware"
+                                                          "Light bulb"
+                                                          "Photographs"
+                                                          "Styrofoams"
+                                                          "Wood";
+                                                  if (isPlastic) {
+                                                    Navigator.pop(context);
+                                                    await _initializeControllerFuture;
+                                                    final image =
+                                                        await _cameraController
+                                                            .takePicture();
+                                                    final imagePath =
+                                                        await _saveImageAndNavigate(
+                                                            image);
+                                                    await _uploadImage_plastic_T(
+                                                        File(imagePath));
+                                                    debugPrint(
+                                                        "success upload");
+                                                  }
+                                                  if (isPaper) {
+                                                    Navigator.pop(context);
+                                                    await _initializeControllerFuture;
+                                                    final image =
+                                                        await _cameraController
+                                                            .takePicture();
+                                                    final imagePath =
+                                                        await _saveImageAndNavigate(
+                                                            image);
+                                                    await _uploadImage_paper_T(
+                                                        File(imagePath));
+                                                    debugPrint(
+                                                        "success upload");
+                                                  }
+                                                  if (isGlass) {
+                                                    Navigator.pop(context);
+                                                    await _initializeControllerFuture;
+                                                    final image =
+                                                        await _cameraController
+                                                            .takePicture();
+                                                    final imagePath =
+                                                        await _saveImageAndNavigate(
+                                                            image);
+                                                    await _uploadImage_glass_T(
+                                                        File(imagePath));
+                                                    debugPrint(
+                                                        "success upload");
+                                                  }
+                                                  if (isMetal) {
+                                                    Navigator.pop(context);
+                                                    await _initializeControllerFuture;
+                                                    final image =
+                                                        await _cameraController
+                                                            .takePicture();
+                                                    final imagePath =
+                                                        await _saveImageAndNavigate(
+                                                            image);
+                                                    await _uploadImage_metal_T(
+                                                        File(imagePath));
+                                                    debugPrint(
+                                                        "success upload");
+                                                  }
+                                                  if (isOthers) {
+                                                    Navigator.pop(context);
+                                                    await _initializeControllerFuture;
+                                                    final image =
+                                                        await _cameraController
+                                                            .takePicture();
+                                                    final imagePath =
+                                                        await _saveImageAndNavigate(
+                                                            image);
+                                                    await _uploadImage_Others_T(
+                                                        File(imagePath));
+                                                    debugPrint(
+                                                        "success upload");
+                                                  } else {
+                                                    debugPrint("error");
+                                                    debugPrint(_plantLabel);
+                                                  }
+                                                } else {
+                                                  Navigator.pop(context);
+                                                  await _initializeControllerFuture;
+                                                  final image =
+                                                      await _cameraController
+                                                          .takePicture();
+                                                  final imagePath =
+                                                      await _saveImageAndNavigate(
+                                                          image);
+                                                  debugPrint("button disabled");
+                                                }
+                                              });
                                             },
                                             child: Image.asset(
                                               "pic/cor_but.png",
@@ -1012,15 +1052,23 @@ class _PlantRecogniserState extends State<PlantRecogniser>
                                     ),
                                   ),
                                   child: GestureDetector(
-                                      onTap: () async {
-                                        Navigator.pop(context);
-                                        await _initializeControllerFuture;
-                                        final image = await _cameraController
-                                            .takePicture();
-                                        final imagePath =
-                                            await _saveImageAndNavigate(image);
-                                        await _uploadImage_Others_F(
-                                            File(imagePath));
+                                      onTap: () {
+                                        _fetchButtonState()
+                                            .then((buttonEnabled) async {
+                                          Navigator.pop(context);
+                                          await _initializeControllerFuture;
+                                          final image = await _cameraController
+                                              .takePicture();
+                                          final imagePath =
+                                              await _saveImageAndNavigate(
+                                                  image);
+                                          if (buttonEnabled) {
+                                            await _uploadImage_Others_F(
+                                                File(imagePath));
+                                            debugPrint(
+                                                "Upload to Other_F done!");
+                                          }
+                                        });
                                       },
                                       child: const Text("I'm not sure",
                                           style: TextStyle(
@@ -1053,17 +1101,24 @@ class _PlantRecogniserState extends State<PlantRecogniser>
                                           ),
                                         ),
                                         child: GestureDetector(
-                                            onTap: () async {
-                                              Navigator.pop(context);
-                                              await _initializeControllerFuture;
-                                              final image =
-                                                  await _cameraController
-                                                      .takePicture();
-                                              final imagePath =
-                                                  await _saveImageAndNavigate(
-                                                      image);
-                                              await _uploadImage_plastic_F(
-                                                  File(imagePath));
+                                            onTap: () {
+                                              _fetchButtonState()
+                                                  .then((buttonEnabled) async {
+                                                Navigator.pop(context);
+                                                await _initializeControllerFuture;
+                                                final image =
+                                                    await _cameraController
+                                                        .takePicture();
+                                                final imagePath =
+                                                    await _saveImageAndNavigate(
+                                                        image);
+                                                if (buttonEnabled) {
+                                                  await _uploadImage_plastic_F(
+                                                      File(imagePath));
+                                                  debugPrint(
+                                                      "Upload to Plastic_F done!");
+                                                }
+                                              });
                                             },
                                             child: const Text("Plastic",
                                                 style: TextStyle(
@@ -1088,17 +1143,24 @@ class _PlantRecogniserState extends State<PlantRecogniser>
                                           ),
                                         ),
                                         child: GestureDetector(
-                                            onTap: () async {
-                                              Navigator.pop(context);
-                                              await _initializeControllerFuture;
-                                              final image =
-                                                  await _cameraController
-                                                      .takePicture();
-                                              final imagePath =
-                                                  await _saveImageAndNavigate(
-                                                      image);
-                                              await _uploadImage_paper_F(
-                                                  File(imagePath));
+                                            onTap: () {
+                                              _fetchButtonState()
+                                                  .then((buttonEnabled) async {
+                                                Navigator.pop(context);
+                                                await _initializeControllerFuture;
+                                                final image =
+                                                    await _cameraController
+                                                        .takePicture();
+                                                final imagePath =
+                                                    await _saveImageAndNavigate(
+                                                        image);
+                                                if (buttonEnabled) {
+                                                  await _uploadImage_paper_F(
+                                                      File(imagePath));
+                                                  debugPrint(
+                                                      "Upload to paper_F done!");
+                                                }
+                                              });
                                             },
                                             child: const Text("Paper",
                                                 style: TextStyle(
@@ -1132,17 +1194,24 @@ class _PlantRecogniserState extends State<PlantRecogniser>
                                           ),
                                         ),
                                         child: GestureDetector(
-                                            onTap: () async {
-                                              Navigator.pop(context);
-                                              await _initializeControllerFuture;
-                                              final image =
-                                                  await _cameraController
-                                                      .takePicture();
-                                              final imagePath =
-                                                  await _saveImageAndNavigate(
-                                                      image);
-                                              await _uploadImage_metal_F(
-                                                  File(imagePath));
+                                            onTap: () {
+                                              _fetchButtonState()
+                                                  .then((buttonEnabled) async {
+                                                Navigator.pop(context);
+                                                await _initializeControllerFuture;
+                                                final image =
+                                                    await _cameraController
+                                                        .takePicture();
+                                                final imagePath =
+                                                    await _saveImageAndNavigate(
+                                                        image);
+                                                if (buttonEnabled) {
+                                                  await _uploadImage_metal_F(
+                                                      File(imagePath));
+                                                  debugPrint(
+                                                      "Upload to metal_F done!");
+                                                }
+                                              });
                                             },
                                             child: const Text("Metal",
                                                 style: TextStyle(
@@ -1167,17 +1236,24 @@ class _PlantRecogniserState extends State<PlantRecogniser>
                                           ),
                                         ),
                                         child: GestureDetector(
-                                            onTap: () async {
-                                              Navigator.pop(context);
-                                              await _initializeControllerFuture;
-                                              final image =
-                                                  await _cameraController
-                                                      .takePicture();
-                                              final imagePath =
-                                                  await _saveImageAndNavigate(
-                                                      image);
-                                              await _uploadImage_glass_F(
-                                                  File(imagePath));
+                                            onTap: () {
+                                              _fetchButtonState()
+                                                  .then((buttonEnabled) async {
+                                                Navigator.pop(context);
+                                                await _initializeControllerFuture;
+                                                final image =
+                                                    await _cameraController
+                                                        .takePicture();
+                                                final imagePath =
+                                                    await _saveImageAndNavigate(
+                                                        image);
+                                                if (buttonEnabled) {
+                                                  await _uploadImage_glass_F(
+                                                      File(imagePath));
+                                                  debugPrint(
+                                                      "Upload to glass_F done!");
+                                                }
+                                              });
                                             },
                                             child: const Text("Glass",
                                                 style: TextStyle(

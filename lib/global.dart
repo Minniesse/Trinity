@@ -1,8 +1,12 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'gallery.dart';
-import 'camera.dart';
+import 'about_us.dart';
 import 'package:camera/camera.dart';
 import 'plant_recogniser.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class global extends StatefulWidget {
   final String name;
@@ -26,9 +30,76 @@ Future<void> camera(String name) async {
   ));
 }
 
+Future<int> scanandgetnum(String folderPath) async {
+  int fileCount = 0;
+
+  final ref = FirebaseStorage.instance.ref(folderPath);
+  final result = await ref.list(ListOptions(maxResults: 1000));
+
+  for (var item in result.items) {
+    final metadata = await item.getMetadata();
+    if (metadata.contentType != null && metadata.contentType!.startsWith('')) {
+      fileCount++;
+    }
+  }
+
+  return fileCount;
+}
+
 class _globalState extends State<global> {
+  bool _isButtonEnabled = true; //turn it on at the first time
+
+  @override
+  void initState() {
+    super.initState();
+    _scanonpathfile();
+    _loadButtonState();
+  }
+
+  Future<void> _saveButtonState(bool isEnabled) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('buttonEnabled', isEnabled);
+  }
+
+  Future<void> _loadButtonState() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _isButtonEnabled = prefs.getBool('buttonEnabled') ?? true;
+    });
+  }
+
+  int _pictureCount = 0;
+  Future<void> _scanonpathfile() async {
+    final imagesFile = await scanandgetnum('images/');
+    final correctfileG = await scanandgetnum('Correct/Glass_T');
+    final correctfilePa = await scanandgetnum('Correct/Paper_T');
+    final correctfileM = await scanandgetnum('Correct/Metal_T');
+    final correctfileP = await scanandgetnum('Correct/Plastic_T');
+    final correctfileO = await scanandgetnum('Correct/Others_T');
+    final wrongfileG = await scanandgetnum('Wrong/Glass_F');
+    final wrongfilePa = await scanandgetnum('Wrong/Paper_F');
+    final wrongfileM = await scanandgetnum('Wrong/Metal_F');
+    final wrongfileP = await scanandgetnum('Wrong/Plastic_F');
+    final wrongfileO = await scanandgetnum('Wrong/Others_F');
+    setState(() {
+      _pictureCount = imagesFile +
+          correctfileG +
+          correctfilePa +
+          correctfileM +
+          correctfileP +
+          correctfileO +
+          wrongfileG +
+          wrongfilePa +
+          wrongfileM +
+          wrongfileP +
+          wrongfileO;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    DocumentReference counterRef =
+        FirebaseFirestore.instance.collection('counter').doc('clickCount');
     return Scaffold(
         body: Stack(children: [
       Container(
@@ -179,18 +250,40 @@ class _globalState extends State<global> {
                         color: Colors.black),
                   ),
                 ),
-                Container(
-                  margin: const EdgeInsets.fromLTRB(0, 0, 65, 20),
-                  alignment: Alignment.bottomRight,
-                  child: const Text(
-                    "273",
-                    style: TextStyle(
-                      fontSize: 70,
-                      fontFamily: 'SFpro',
-                      color: Color.fromRGBO(29, 143, 0, 1),
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                StreamBuilder<DocumentSnapshot>(
+                  stream: counterRef.snapshots(),
+                  builder: (BuildContext context,
+                      AsyncSnapshot<DocumentSnapshot> snapshot) {
+                    if (snapshot.hasError) {
+                      debugPrint('Error: ${snapshot.error}');
+                      return Text('Error: ${snapshot.error}');
+                    }
+
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Text(
+                        'Loading...',
+                        style: TextStyle(
+                          color: Colors.transparent,
+                        ),
+                      );
+                    }
+
+                    // Display the count value in a Text widget
+                    int count = snapshot.data!['count'];
+                    return Container(
+                      margin: const EdgeInsets.fromLTRB(0, 0, 65, 20),
+                      alignment: Alignment.bottomRight,
+                      child: Text(
+                        '$count',
+                        style: const TextStyle(
+                          fontSize: 70,
+                          fontFamily: 'SFpro',
+                          color: Color.fromRGBO(29, 143, 0, 1),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    );
+                  },
                 ),
                 Container(
                   margin: const EdgeInsets.fromLTRB(0, 0, 20, 30),
@@ -253,87 +346,122 @@ class _globalState extends State<global> {
                         width: 47,
                         height: 47,
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12),
-                            border: Border.all(
-                                width: 1,
-                                color: const Color.fromRGBO(224, 224, 224, 1)),
-                            image: const DecorationImage(
-                              image: AssetImage(
-                                  'C:/Users/moski/Downloads/app/flutter_app/pic/funfueng.png'),
-                              fit: BoxFit.contain,
-                            ),
-                            color: Colors.white),
-                      ),
-                      Container(
-                          margin: const EdgeInsets.fromLTRB(15, 0, 0, 3),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
-                              Text(
-                                "Settings",
-                                style: TextStyle(
-                                    fontSize: 23,
-                                    fontFamily: 'SFpro',
-                                    //fontWeight: FontWeight.bold,
-                                    color: Colors.black),
-                              ),
-                              Text(
-                                "Set the color theme, set the region",
-                                style: TextStyle(
-                                    fontSize: 15,
-                                    fontFamily: 'SFpro',
-                                    //fontWeight: FontWeight.bold,
-                                    color: Color.fromRGBO(102, 102, 102, 1)),
-                              ),
-                            ],
-                          )),
-                    ],
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.fromLTRB(25, 15, 0, 0),
-                  child: Row(
-                    children: [
-                      Container(
-                        width: 47,
-                        height: 47,
-                        decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(12),
                           border: Border.all(
-                              width: 1,
-                              color: const Color.fromRGBO(224, 224, 224, 1)),
+                            width: 1,
+                            color: const Color.fromRGBO(224, 224, 224, 1),
+                          ),
                           image: const DecorationImage(
                             image: AssetImage(
-                                'C:/Users/moski/Downloads/app/flutter_app/pic/human.png'),
+                                'C:/Users/moski/Downloads/app/flutter_app/pic/funfueng.png'),
                             fit: BoxFit.contain,
                           ),
                           color: Colors.white,
                         ),
                       ),
                       Container(
-                          margin: const EdgeInsets.fromLTRB(15, 0, 0, 3),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
-                              Text(
-                                "About us",
-                                style: TextStyle(
-                                    fontSize: 23,
-                                    fontFamily: 'SFpro',
-                                    //fontWeight: FontWeight.bold,
-                                    color: Colors.black),
+                        margin: const EdgeInsets.fromLTRB(15, 0, 0, 3),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: const [
+                            Text(
+                              "Settings",
+                              style: TextStyle(
+                                fontSize: 23,
+                                fontFamily: 'SFpro',
+                                //fontWeight: FontWeight.bold,
+                                color: Colors.black,
                               ),
-                              Text(
-                                "Our story and our objectives and contacts.",
-                                style: TextStyle(
-                                    fontSize: 15,
-                                    fontFamily: 'SFpro',
-                                    //fontWeight: FontWeight.bold,
-                                    color: Color.fromRGBO(102, 102, 102, 1)),
-                              ),
-                            ],
-                          )),
+                            ),
+                            Text(
+                              "Allow send photo to the server",
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontFamily: 'SFpro',
+                                  //fontWeight: FontWeight.bold,
+                                  color: Color.fromRGBO(102, 102, 102, 1)),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: Container(
+                            margin: const EdgeInsets.fromLTRB(0, 0, 25, 0),
+                            child: Switch(
+                              value: _isButtonEnabled,
+                              onChanged: (bool value) {
+                                setState(() {
+                                  _isButtonEnabled = value;
+                                });
+                                _saveButtonState(value);
+                              },
+                            ),
+                          ),
+                        ),
+                      ),
                     ],
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    camera(widget.name).then((_) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => about(
+                                  camera: widget.camera,
+                                  name: widget.name,
+                                )),
+                      );
+                    });
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.fromLTRB(25, 15, 0, 0),
+                    child: Row(
+                      children: [
+                        Container(
+                          width: 47,
+                          height: 47,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(
+                                width: 1,
+                                color: const Color.fromRGBO(224, 224, 224, 1)),
+                            image: const DecorationImage(
+                              image: AssetImage(
+                                  'C:/Users/moski/Downloads/app/flutter_app/pic/human.png'),
+                              fit: BoxFit.contain,
+                            ),
+                            color: Colors.white,
+                          ),
+                        ),
+                        Container(
+                            margin: const EdgeInsets.fromLTRB(15, 0, 0, 3),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: const [
+                                Text(
+                                  "About us",
+                                  style: TextStyle(
+                                      fontSize: 23,
+                                      fontFamily: 'SFpro',
+                                      //fontWeight: FontWeight.bold,
+                                      color: Colors.black),
+                                ),
+                                Text(
+                                  "Our story and our objectives and contacts.",
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      fontFamily: 'SFpro',
+                                      //fontWeight: FontWeight.bold,
+                                      color: Color.fromRGBO(102, 102, 102, 1)),
+                                ),
+                              ],
+                            )),
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -374,14 +502,14 @@ class _globalState extends State<global> {
                           Container(
                             margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                             child: GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          global(name: widget.name)),
-                                );
-                              },
+                              // onTap: () {
+                              //   Navigator.push(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //         builder: (context) =>
+                              //             global(name: widget.name)),
+                              //   );
+                              // },
                               child: Image.asset(
                                 "C:/Users/moski/Downloads/app/flutter_app/pic/global_icon.png",
                                 height:

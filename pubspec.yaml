@@ -49,6 +49,8 @@ dependencies:
       ref: 783f15e5a87126159147d8ea30b98eea9207ac70
   firebase_core: ^2.10.0
   firebase_storage: ^11.1.1
+  cloud_firestore: ^4.5.2
+  provider: ^6.0.5
 
 flutter_icons:
   android: true

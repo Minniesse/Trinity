@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 // import 'package:flutter_app/camera.dart';
-import 'camera.dart';
 import 'Home.dart';
 import 'package:camera/camera.dart';
 

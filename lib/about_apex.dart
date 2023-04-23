@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'about_us.dart';
+import 'package:camera/camera.dart';
 
 class apex extends StatefulWidget {
-  const apex({super.key});
+  final String name;
+  final CameraDescription? camera;
+  const apex({super.key, this.camera, required this.name});
 
   @override
   State<apex> createState() => _apexState();
@@ -16,27 +19,41 @@ class _apexState extends State<apex> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Container(
-            margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-            height: 330,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(19),
-              border: Border.all(
-                  width: 1, color: const Color.fromRGBO(224, 224, 224, 1)),
-              image: const DecorationImage(
-                image: AssetImage(
-                    'C:/Users/moski/Downloads/app/flutter_app/pic/apex.png'),
-                fit: BoxFit.cover,
-              ),
-              boxShadow: const [
-                BoxShadow(
-                  color: Color.fromRGBO(0, 0, 0, 0.2),
-                  blurRadius: 4.0,
-                  spreadRadius: 0.0,
-                  offset: Offset(0.0, 3.0),
+          GestureDetector(
+            onTap: () {
+              camera(widget.name).then((_) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => about(
+                            camera: widget.camera,
+                            name: widget.name,
+                          )),
+                );
+              });
+            },
+            child: Container(
+              margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+              height: 330,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(19),
+                border: Border.all(
+                    width: 1, color: const Color.fromRGBO(224, 224, 224, 1)),
+                image: const DecorationImage(
+                  image: AssetImage(
+                      'C:/Users/moski/Downloads/app/flutter_app/pic/apex.png'),
+                  fit: BoxFit.cover,
                 ),
-              ],
+                boxShadow: const [
+                  BoxShadow(
+                    color: Color.fromRGBO(0, 0, 0, 0.2),
+                    blurRadius: 4.0,
+                    spreadRadius: 0.0,
+                    offset: Offset(0.0, 3.0),
+                  ),
+                ],
+              ),
             ),
           ),
           Container(

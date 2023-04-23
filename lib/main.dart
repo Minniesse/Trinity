@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'get_started.dart';
 import 'package:preload_page_view/preload_page_view.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  Firebase.initializeApp();
   runApp(const Test());
 }
 
@@ -16,6 +21,11 @@ class Test extends StatelessWidget {
       home: Splash(),
     );
   }
+}
+
+Future<bool> hasSetName() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  return prefs.getBool('hasSetName') ?? false;
 }
 
 class Splash extends StatefulWidget {
