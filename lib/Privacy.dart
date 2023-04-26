@@ -113,7 +113,7 @@ class _PolicyState extends State<Policy> {
                     margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                     child: Image.asset(
                         "C:/Users/moski/Downloads/app/flutter_app/pic/Group 36717.png",
-                        width: MediaQuery.of(context).size.width * 0.9,
+                        width: MediaQuery.of(context).size.width * 0.85,
                         height: MediaQuery.of(context).size.height * 0.7,
                         fit: BoxFit.fill),
                   ),
@@ -124,7 +124,7 @@ class _PolicyState extends State<Policy> {
                       children: [
                         Container(
                             alignment: Alignment.centerLeft,
-                            margin: const EdgeInsets.only(bottom: 0),
+                            margin: const EdgeInsets.only(top: 5),
                             //color: Colors.blue,
                             width: MediaQuery.of(context).size.width * 0.5,
                             height: MediaQuery.of(context).size.height * 0.04,
@@ -140,9 +140,9 @@ class _PolicyState extends State<Policy> {
                             )),
                         Container(
                           alignment: Alignment.center,
-                          margin: const EdgeInsets.fromLTRB(0, 0, 0, 15),
+                          margin: const EdgeInsets.fromLTRB(0, 5, 0, 15),
                           //color: Colors.orange,
-                          width: MediaQuery.of(context).size.width * 0.75,
+                          width: MediaQuery.of(context).size.width * 0.7,
                           height: MediaQuery.of(context).size.height * 0.48,
                           child: SingleChildScrollView(
                             controller: _scrollController,

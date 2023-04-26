@@ -68,7 +68,7 @@ class _HomeState extends State<Home> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(30, 90, 30, 0),
+            padding: const EdgeInsets.fromLTRB(30, 40, 30, 0),
             child: Column(
               children: [
                 Container(
@@ -184,13 +184,13 @@ class _HomeState extends State<Home> {
                             )),
                       ],
                     )),
-                Container(
+                Expanded(
                     //color: Colors.orange,
                     child: Stack(
                   children: [
                     Container(
                         alignment: Alignment.center,
-                        margin: const EdgeInsets.fromLTRB(230, 20, 0, 0),
+                        margin: const EdgeInsets.fromLTRB(230, 0, 0, 0),
                         child: Image.asset(
                           "C:/Users/moski/Downloads/app/flutter_app/pic/Glass_Drink.png",
                           width: MediaQuery.of(context).size.width,
@@ -199,7 +199,7 @@ class _HomeState extends State<Home> {
                         )),
                     Container(
                         alignment: Alignment.center,
-                        margin: const EdgeInsets.fromLTRB(0, 120, 240, 0),
+                        margin: const EdgeInsets.fromLTRB(0, 0, 240, 0),
                         child: Image.asset(
                           "C:/Users/moski/Downloads/app/flutter_app/pic/Soda_Can.png",
                           width: MediaQuery.of(context).size.width,
@@ -207,9 +207,9 @@ class _HomeState extends State<Home> {
                           fit: BoxFit.contain,
                         )),
                     Container(
-                        margin: const EdgeInsets.fromLTRB(0, 90, 0, 0),
+                        margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                         child: Align(
-                          alignment: Alignment.bottomCenter,
+                          alignment: Alignment.center,
                           //submit see the 16th line
                           child: ElevatedButton(
                             onPressed: submit

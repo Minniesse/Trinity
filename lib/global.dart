@@ -114,7 +114,7 @@ class _globalState extends State<global> {
         //crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            margin: const EdgeInsets.fromLTRB(0, 40, 0, 0),
+            margin: const EdgeInsets.fromLTRB(0, 25, 0, 0),
             //width: double.infinity,
             //height: MediaQuery.of(context).size.height * 0.3,
             //color: Colors.orange,
@@ -125,8 +125,8 @@ class _globalState extends State<global> {
                     child: Stack(
                       children: [
                         Container(
-                          width: 362,
-                          height: 232,
+                          width: 345,
+                          height: MediaQuery.of(context).size.height * 0.3,
                           decoration: BoxDecoration(
                             gradient: const LinearGradient(
                                 begin: Alignment(3, -3),
@@ -159,7 +159,8 @@ class _globalState extends State<global> {
                                 child: Image.asset(
                                   "C:/Users/moski/Downloads/app/flutter_app/pic/Logo.png",
                                   fit: BoxFit.cover,
-                                  // width: 68,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.15,
                                   // height: 51,
                                 ),
                               ),
@@ -218,7 +219,7 @@ class _globalState extends State<global> {
           ),
           Container(
             margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-            width: 362,
+            width: 345,
             height: MediaQuery.of(context).size.height * 0.17,
             decoration: const BoxDecoration(
               image: DecorationImage(
@@ -289,7 +290,7 @@ class _globalState extends State<global> {
                   margin: const EdgeInsets.fromLTRB(0, 0, 20, 30),
                   alignment: Alignment.bottomRight,
                   child: const Text(
-                    "Junks",
+                    "items",
                     style: TextStyle(
                       fontSize: 16,
                       fontFamily: 'SFpro',
@@ -303,7 +304,7 @@ class _globalState extends State<global> {
           ),
           Container(
             margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-            width: 362,
+            width: 345,
             height: 212,
             decoration: BoxDecoration(
               gradient: const LinearGradient(
@@ -451,7 +452,7 @@ class _globalState extends State<global> {
                                       color: Colors.black),
                                 ),
                                 Text(
-                                  "Our story and our objectives and contacts.",
+                                  "Our story and our objectives.",
                                   style: TextStyle(
                                       fontSize: 15,
                                       fontFamily: 'SFpro',
@@ -513,7 +514,7 @@ class _globalState extends State<global> {
                               child: Image.asset(
                                 "C:/Users/moski/Downloads/app/flutter_app/pic/global_icon.png",
                                 height:
-                                    MediaQuery.of(context).size.height * 0.035,
+                                    MediaQuery.of(context).size.height * 0.045,
                                 // width: 27.18,
                                 // height: 28.37,
                                 fit: BoxFit.contain,
@@ -538,7 +539,7 @@ class _globalState extends State<global> {
                                 child: Image.asset(
                                   "C:/Users/moski/Downloads/app/flutter_app/pic/home_icon.png",
                                   height: MediaQuery.of(context).size.height *
-                                      0.045,
+                                      0.055,
                                   // width: 27.18,
                                   // height: 28.37,
                                   fit: BoxFit.contain,
@@ -562,7 +563,7 @@ class _globalState extends State<global> {
                               child: Image.asset(
                                 "C:/Users/moski/Downloads/app/flutter_app/pic/pictute_icon.png",
                                 height:
-                                    MediaQuery.of(context).size.height * 0.035,
+                                    MediaQuery.of(context).size.height * 0.045,
                                 // width: 27.18,
                                 // height: 28.37,
                                 fit: BoxFit.contain,

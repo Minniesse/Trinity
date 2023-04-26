@@ -60,6 +60,12 @@ class _GalleryState extends State<gallery> {
     return Scaffold(
         body: Stack(
       children: [
+        Container(
+          constraints: const BoxConstraints.expand(),
+          decoration: const BoxDecoration(
+            color: Color.fromRGBO(230, 230, 230, 1),
+          ),
+        ),
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           //crossAxisAlignment: CrossAxisAlignment.center,
@@ -67,7 +73,7 @@ class _GalleryState extends State<gallery> {
             Container(
                 //alignment: Alignment.bottomLeft,
                 //color: Colors.orange,
-                margin: const EdgeInsets.fromLTRB(0, 60, 0, 0),
+                margin: const EdgeInsets.fromLTRB(0, 40, 0, 0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   //crossAxisAlignment: CrossAxisAlignment.center,
@@ -85,7 +91,7 @@ class _GalleryState extends State<gallery> {
                   ],
                 )),
             Container(
-              margin: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+              margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
               padding: EdgeInsets.zero,
               width: MediaQuery.of(context).size.width * 0.86,
               height: MediaQuery.of(context).size.height * 0.7,
@@ -126,118 +132,116 @@ class _GalleryState extends State<gallery> {
                 ),
               ),
             ),
-            Container(
+            Expanded(
                 // width: MediaQuery.of(context).size.width * 0.93,
                 // height: MediaQuery.of(context).size.height * 0.15,
-                alignment: Alignment.bottomCenter,
                 child: Stack(
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.fromLTRB(0, 0, 0, 37),
-                      width: 375,
-                      height: 89.29,
-                      decoration: BoxDecoration(
-                        image: const DecorationImage(
-                          image: AssetImage(
-                              'C:/Users/moski/Downloads/app/flutter_app/pic/navigator.png'),
-                          fit: BoxFit.cover,
-                        ),
-                        border: Border.all(
-                            width: 2,
-                            color: const Color.fromRGBO(255, 255, 255, 0.7)),
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(45)),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Color.fromRGBO(0, 0, 0, 0.2),
-                            blurRadius: 4.0,
-                            spreadRadius: 0.0,
-                            offset: Offset(0.0, 3.0),
-                          ),
-                        ],
-                      ),
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Container(
-                              margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                              child: GestureDetector(
-                                onTap: () {
-                                  camera(widget.name).then((_) {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => global(
-                                                camera: widget.camera,
-                                                name: widget.name,
-                                              )),
-                                    );
-                                  });
-                                },
-                                child: Image.asset(
-                                  "C:/Users/moski/Downloads/app/flutter_app/pic/global_icon.png",
-                                  height: MediaQuery.of(context).size.height *
-                                      0.035,
-                                  // width: 27.18,
-                                  // height: 28.37,
-                                  fit: BoxFit.contain,
-                                ),
-                              ),
-                            ),
-                            Container(
-                              margin: const EdgeInsets.fromLTRB(0, 5, 0, 0),
-                              child: GestureDetector(
-                                onTap: () {
-                                  camera(widget.name).then((_) {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => PlantRecogniser(
-                                                camera: widget.camera,
-                                                name: widget.name,
-                                              )),
-                                    );
-                                  });
-                                },
-                                child: Image.asset(
-                                  "C:/Users/moski/Downloads/app/flutter_app/pic/home_icon.png",
-                                  height: MediaQuery.of(context).size.height *
-                                      0.045,
-                                  // width: 27.18,
-                                  // height: 28.37,
-                                  fit: BoxFit.contain,
-                                ),
-                              ),
-                            ),
-                            Container(
-                              margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                              child: GestureDetector(
-                                // onTap: () {
-                                //   Navigator.push(
-                                //     context,
-                                //     MaterialPageRoute(
-                                //         builder: (context) => const gallery()),
-                                //   );
-                                // },
-                                child: Image.asset(
-                                  "C:/Users/moski/Downloads/app/flutter_app/pic/pictute_icon.png",
-                                  height: MediaQuery.of(context).size.height *
-                                      0.035,
-                                  // width: 27.18,
-                                  // height: 28.37,
-                                  fit: BoxFit.contain,
-                                ),
-                              ),
-                            ),
-                          ]),
-                      // child: Image.asset(
-                      //   "C:/Users/moski/Downloads/app/flutter_app/pic/navigator.png",
-                      //   height: MediaQuery.of(context).size.height * 0.15,
-                      //   fit: BoxFit.contain,
-                      // ),
+              children: [
+                Container(
+                  margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                  width: 375,
+                  height: 89.29,
+                  decoration: BoxDecoration(
+                    image: const DecorationImage(
+                      image: AssetImage(
+                          'C:/Users/moski/Downloads/app/flutter_app/pic/navigator.png'),
+                      fit: BoxFit.cover,
                     ),
-                  ],
-                )),
+                    border: Border.all(
+                        width: 2,
+                        color: const Color.fromRGBO(255, 255, 255, 0.7)),
+                    borderRadius: const BorderRadius.all(Radius.circular(45)),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Color.fromRGBO(0, 0, 0, 0.2),
+                        blurRadius: 4.0,
+                        spreadRadius: 0.0,
+                        offset: Offset(0.0, 3.0),
+                      ),
+                    ],
+                  ),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                          child: GestureDetector(
+                            onTap: () {
+                              camera(widget.name).then((_) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => global(
+                                            camera: widget.camera,
+                                            name: widget.name,
+                                          )),
+                                );
+                              });
+                            },
+                            child: Image.asset(
+                              "C:/Users/moski/Downloads/app/flutter_app/pic/global_icon.png",
+                              height:
+                                  MediaQuery.of(context).size.height * 0.045,
+                              // width: 27.18,
+                              // height: 28.37,
+                              fit: BoxFit.contain,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.fromLTRB(0, 5, 0, 0),
+                          child: GestureDetector(
+                            onTap: () {
+                              camera(widget.name).then((_) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => PlantRecogniser(
+                                            camera: widget.camera,
+                                            name: widget.name,
+                                          )),
+                                );
+                              });
+                            },
+                            child: Image.asset(
+                              "C:/Users/moski/Downloads/app/flutter_app/pic/home_icon.png",
+                              height:
+                                  MediaQuery.of(context).size.height * 0.055,
+                              // width: 27.18,
+                              // height: 28.37,
+                              fit: BoxFit.contain,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                          child: GestureDetector(
+                            // onTap: () {
+                            //   Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //         builder: (context) => const gallery()),
+                            //   );
+                            // },
+                            child: Image.asset(
+                              "C:/Users/moski/Downloads/app/flutter_app/pic/pictute_icon.png",
+                              height:
+                                  MediaQuery.of(context).size.height * 0.045,
+                              // width: 27.18,
+                              // height: 28.37,
+                              fit: BoxFit.contain,
+                            ),
+                          ),
+                        ),
+                      ]),
+                  // child: Image.asset(
+                  //   "C:/Users/moski/Downloads/app/flutter_app/pic/navigator.png",
+                  //   height: MediaQuery.of(context).size.height * 0.15,
+                  //   fit: BoxFit.contain,
+                  // ),
+                ),
+              ],
+            )),
           ],
         )
       ],
