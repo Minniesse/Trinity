@@ -351,7 +351,7 @@ class _PlantRecogniserState extends State<PlantRecogniser>
               Container(
                   //alignment: Alignment.center,
                   //color: Colors.orange,
-                  margin: const EdgeInsets.fromLTRB(0, 30, 0, 0),
+                  margin: const EdgeInsets.fromLTRB(0, 50, 0, 0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     //crossAxisAlignment: CrossAxisAlignment.center,
@@ -361,7 +361,7 @@ class _PlantRecogniserState extends State<PlantRecogniser>
                         //color: Colors.green,
                         child: Image.asset(
                           "C:/Users/moski/Downloads/app/flutter_app/pic/small trinity.png",
-                          height: MediaQuery.of(context).size.height * 0.05,
+                          height: MediaQuery.of(context).size.height * 0.045,
                           fit: BoxFit.contain,
                         ),
                       ),
@@ -371,34 +371,23 @@ class _PlantRecogniserState extends State<PlantRecogniser>
                         //color: Colors.green,
                         child: Image.asset(
                           "C:/Users/moski/Downloads/app/flutter_app/pic/Tri_text.png",
-                          height: MediaQuery.of(context).size.height * 0.04,
+                          height: MediaQuery.of(context).size.height * 0.035,
                           fit: BoxFit.contain,
                         ),
                       ),
                     ],
                   )),
               Container(
-                margin: const EdgeInsets.fromLTRB(0, 5, 0, 0),
+                margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                 width: MediaQuery.of(context).size.width * 0.86,
                 height: MediaQuery.of(context).size.height * 0.7,
                 child: Stack(
                   children: [
-                    Align(
-                      alignment: Alignment.topCenter,
-                      child: Container(
-                        width: MediaQuery.of(context).size.width * 0.79,
-                        height: MediaQuery.of(context).size.height * 0.67,
-                        decoration: BoxDecoration(
-                          color: Colors.black,
-                          borderRadius: BorderRadius.circular(26),
-                        ),
-                      ),
-                    ),
                     ClipRRect(
                       borderRadius: BorderRadius.circular(26),
                       child: Container(
-                        alignment: Alignment.topCenter,
                         margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                        color: const Color.fromRGBO(255, 255, 255, 0.5),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(26),
                           child: FutureBuilder<void>(
@@ -411,9 +400,10 @@ class _PlantRecogniserState extends State<PlantRecogniser>
                                   fit: BoxFit.cover,
                                   child: SizedBox(
                                     width: MediaQuery.of(context).size.width *
-                                        0.79,
+                                        0.86,
                                     height: MediaQuery.of(context).size.height *
-                                        0.67, // minus half the button height
+                                            0.71 -
+                                        28, // minus half the button height
                                     child: AspectRatio(
                                       aspectRatio:
                                           _cameraController.value.aspectRatio,
@@ -507,7 +497,7 @@ class _PlantRecogniserState extends State<PlantRecogniser>
                                   child: Image.asset(
                                     "C:/Users/moski/Downloads/app/flutter_app/pic/global_icon.png",
                                     height: MediaQuery.of(context).size.height *
-                                        0.045,
+                                        0.035,
                                     // width: 27.18,
                                     // height: 28.37,
                                     fit: BoxFit.contain,
@@ -519,7 +509,7 @@ class _PlantRecogniserState extends State<PlantRecogniser>
                                 child: Image.asset(
                                   "C:/Users/moski/Downloads/app/flutter_app/pic/home_icon.png",
                                   height: MediaQuery.of(context).size.height *
-                                      0.055,
+                                      0.045,
                                   // width: 27.18,
                                   // height: 28.37,
                                   fit: BoxFit.contain,
@@ -543,7 +533,7 @@ class _PlantRecogniserState extends State<PlantRecogniser>
                                   child: Image.asset(
                                     "C:/Users/moski/Downloads/app/flutter_app/pic/pictute_icon.png",
                                     height: MediaQuery.of(context).size.height *
-                                        0.045,
+                                        0.035,
                                     // width: 27.18,
                                     // height: 28.37,
                                     fit: BoxFit.contain,
@@ -662,7 +652,7 @@ class _PlantRecogniserState extends State<PlantRecogniser>
                 child: Container(
                   margin: const EdgeInsets.fromLTRB(0, 0, 0, 10),
                   child: Container(
-                    width: MediaQuery.of(context).size.width * 0.8,
+                    width: MediaQuery.of(context).size.width * 0.87,
                     height: MediaQuery.of(context).size.height * 0.45,
                     child: ClipRRect(
                       borderRadius: const BorderRadius.all(
@@ -692,7 +682,7 @@ class _PlantRecogniserState extends State<PlantRecogniser>
                                 ),
                                 Container(
                                   margin:
-                                      const EdgeInsets.fromLTRB(270, 20, 10, 0),
+                                      const EdgeInsets.fromLTRB(290, 20, 0, 0),
                                   width: 40,
                                   height: 40,
                                   child: GestureDetector(
@@ -717,7 +707,7 @@ class _PlantRecogniserState extends State<PlantRecogniser>
                                       children: [
                                         Container(
                                           margin: const EdgeInsets.fromLTRB(
-                                              30, 25, 0, 0),
+                                              30, 35, 0, 0),
                                           alignment: Alignment.topLeft,
                                           child: Text(
                                             title,
@@ -778,7 +768,7 @@ class _PlantRecogniserState extends State<PlantRecogniser>
                                         ),
                                         Container(
                                           margin: const EdgeInsets.fromLTRB(
-                                              0, 0, 25, 0),
+                                              0, 0, 30, 0),
                                           //alignment: Alignment.topRight,
                                           child: GestureDetector(
                                             onTap: () {
@@ -905,9 +895,9 @@ class _PlantRecogniserState extends State<PlantRecogniser>
                                 Center(
                                   child: Container(
                                     margin:
-                                        const EdgeInsets.fromLTRB(0, 9, 0, 0),
-                                    width: MediaQuery.of(context).size.width *
-                                        0.65,
+                                        const EdgeInsets.fromLTRB(0, 15, 0, 0),
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.7,
                                     child: const Divider(
                                         color: Color.fromRGBO(89, 89, 92, 1),
                                         thickness: 1,
@@ -1008,7 +998,7 @@ class _PlantRecogniserState extends State<PlantRecogniser>
                 child: Container(
                   margin: const EdgeInsets.fromLTRB(0, 0, 0, 10),
                   child: Container(
-                    width: MediaQuery.of(context).size.width * 0.8,
+                    width: MediaQuery.of(context).size.width * 0.87,
                     height: MediaQuery.of(context).size.height * 0.45,
                     child: ClipRRect(
                       borderRadius: const BorderRadius.all(
@@ -1021,8 +1011,8 @@ class _PlantRecogniserState extends State<PlantRecogniser>
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
-                                margin: const EdgeInsets.fromLTRB(30, 30, 0, 0),
-                                width: MediaQuery.of(context).size.width * 0.35,
+                                margin: const EdgeInsets.fromLTRB(30, 40, 0, 0),
+                                width: MediaQuery.of(context).size.width * 0.45,
                                 child: const FittedBox(
                                   child: Text(
                                     "We’re sorry\nto hear that.",
@@ -1041,7 +1031,7 @@ class _PlantRecogniserState extends State<PlantRecogniser>
                                 style: TextStyle(
                                     color: Color.fromRGBO(33, 33, 33, 1),
                                     fontFamily: "SFpro",
-                                    fontSize: 14,
+                                    fontSize: 16,
                                     fontWeight: FontWeight.w600),
                               ),
                             ),
@@ -1052,7 +1042,7 @@ class _PlantRecogniserState extends State<PlantRecogniser>
                                   alignment: Alignment.center,
                                   height: 38,
                                   width:
-                                      MediaQuery.of(context).size.width * 0.65,
+                                      MediaQuery.of(context).size.width * 0.72,
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(26),
@@ -1100,7 +1090,7 @@ class _PlantRecogniserState extends State<PlantRecogniser>
                                             0, 0, 0, 0),
                                         alignment: Alignment.center,
                                         height: 38,
-                                        width: 120,
+                                        width: 136,
                                         decoration: BoxDecoration(
                                           color: Colors.white,
                                           borderRadius:
@@ -1142,7 +1132,7 @@ class _PlantRecogniserState extends State<PlantRecogniser>
                                             0, 0, 0, 0),
                                         alignment: Alignment.center,
                                         height: 38,
-                                        width: 120,
+                                        width: 136,
                                         decoration: BoxDecoration(
                                           color: Colors.white,
                                           borderRadius:
@@ -1193,7 +1183,7 @@ class _PlantRecogniserState extends State<PlantRecogniser>
                                             0, 0, 0, 0),
                                         alignment: Alignment.center,
                                         height: 38,
-                                        width: 120,
+                                        width: 136,
                                         decoration: BoxDecoration(
                                           color: Colors.white,
                                           borderRadius:
@@ -1235,7 +1225,7 @@ class _PlantRecogniserState extends State<PlantRecogniser>
                                             0, 0, 0, 0),
                                         alignment: Alignment.center,
                                         height: 38,
-                                        width: 120,
+                                        width: 136,
                                         decoration: BoxDecoration(
                                           color: Colors.white,
                                           borderRadius:
